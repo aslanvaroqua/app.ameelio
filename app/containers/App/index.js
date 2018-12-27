@@ -5,6 +5,8 @@ import Auth from './Auth';
 import Application from './Application';
 import LoginDedicated from '../Pages/Standalone/LoginDedicated';
 import ThemeWrapper, { AppContext } from './ThemeWrapper';
+import LandingPage from './LandingPage';
+
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 
@@ -15,7 +17,8 @@ class App extends React.Component {
         <AppContext.Consumer>
           {(changeMode) => (
             <Switch>
-              <Route path="/" exact component={LoginDedicated} />
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/login" exact component={LoginDedicated} />
               <Route
                 path="/app"
                 render={(props) => <Application {...props} changeMode={changeMode} />}

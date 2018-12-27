@@ -9,12 +9,12 @@ import {
 } from '@material-ui/core/styles';
 import 'dan-styles/vendors/react-loading-bar/index.css';
 import {
-  changeThemeAction,
+  // changeThemeAction,
   changeModeAction,
-  changeGradientAction,
-  changeDecoAction,
-  changeBgPositionAction,
-  changeLayoutAction,
+  // changeGradientAction,
+  // changeDecoAction,
+  // changeBgPositionAction,
+  // changeLayoutAction,
 } from 'dan-actions/UiActions';
 import applicationTheme from '../../styles/theme/applicationTheme';
 
@@ -96,6 +96,7 @@ ThemeWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string.isRequired,
   mode: PropTypes.string.isRequired,
+  changeMode: PropTypes.func.isRequired,
 };
 
 const reducer = 'ui';

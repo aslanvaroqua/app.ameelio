@@ -17,3 +17,15 @@ export Notification from './Notification/Notification';
 export EmptyData from './Tables/EmptyData';
 // Error
 export ErrorWrap from './Error/ErrorWrap';
+// Landing Page
+export Banner from './LandingPage/Banner';
+export Contact from './LandingPage/Contact';
+export Feature from './LandingPage/Feature';
+export Footer from './LandingPage/Footer';
+export HeaderLanding from './LandingPage/Header';
+export Pricing from './LandingPage/Pricing';
+export Showcase from './LandingPage/Showcase';
+export ShowcaseSlider from './LandingPage/ShowcaseSlider';
+export Technology from './LandingPage/Technology';
+export Testimonials from './LandingPage/Testimonials';
+export SideNav from './LandingPage/SideNav';
