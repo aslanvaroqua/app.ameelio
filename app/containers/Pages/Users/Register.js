@@ -5,18 +5,20 @@ import { withStyles } from '@material-ui/core/styles';
 import brand from 'dan-api/dummy/brand';
 import { RegisterForm } from 'dan-components';
 import styles from 'dan-components/Forms/user-jss';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+
+import { registerUser } from '../../../actions/AuthActions';
 
 class Register extends React.Component {
-  state = {
-    valueForm: []
-  }
+  // state = {
+  //   valueForm: []
+  // }
 
   submitForm(values) {
-    setTimeout(() => {
-      this.setState({ valueForm: values });
-      console.log(`You submitted:\n\n${this.state.valueForm}`); // eslint-disable-line
-      window.location.href = '/app';
-    }, 500); // simulate server latency
+    console.log(values.toObject());
+    const { registerUser: registerUserAction } = this.props;
+    registerUserAction(values.toObject());
   }
 
   render() {
@@ -45,6 +47,10 @@ class Register extends React.Component {
 
 Register.propTypes = {
   classes: PropTypes.object.isRequired,
+  registerUser: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Register);
+export default compose(
+  withStyles(styles),
+  connect(null, { registerUser })
+)(Register);

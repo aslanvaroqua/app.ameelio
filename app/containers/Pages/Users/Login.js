@@ -5,19 +5,20 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { LoginForm } from 'dan-components';
 import styles from 'dan-components/Forms/user-jss';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+
+import { login } from '../../../actions/AuthActions';
 
 class Login extends React.Component {
-  state = {
-    valueForm: []
-  }
+  // state = {
+  //   valueForm: []
+  // }
 
   submitForm(values) {
-    const { valueForm } = this.state;
-    setTimeout(() => {
-      this.setState({ valueForm: values });
-      console.log(`You submitted:\n\n${valueForm}`);
-      window.location.href = '/app';
-    }, 500); // simulate server latency
+    console.log(values.toObject());
+    const { login: loginAction } = this.props;
+    loginAction(values.toObject());
   }
 
   render() {
@@ -46,6 +47,10 @@ class Login extends React.Component {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default compose(
+  withStyles(styles),
+  connect(null, { login })
+)(Login);
