@@ -21,3 +21,7 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 // Login Actions
 export const LOG_IN = 'LOGIN';
 export const LOG_IN_SUCESS = 'LOGIN_SUCESS';
+
+// Confirm Email Actions
+export const CONFIRM_EMAIL = 'CONFIRM_EMAIL';
+export const CONFIRM_EMAIL_SUCCESS = 'CONFIRM_EMAIL_SUCCESS';

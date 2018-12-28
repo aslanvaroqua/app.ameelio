@@ -13,8 +13,8 @@ import {
   Stitch,
 } from 'mongodb-stitch-browser-sdk';
 
-import { REGISTER_USER, LOG_IN } from '../actions/actionConstants';
-import { registerUserSuccess, loginSuccess } from '../actions/AuthActions';
+import { REGISTER_USER, LOG_IN, CONFIRM_EMAIL } from '../actions/actionConstants';
+import { registerUserSuccess, loginSuccess, confirmEmailSuccess } from '../actions/AuthActions';
 
 function getStitchClient(state) {
   return state.getIn(['auth', 'stitchClient']);
@@ -30,8 +30,8 @@ function* registerUser(action) {
     const emailPassClient = Stitch.defaultAppClient.auth
       .getProviderClient(UserPasswordAuthProviderClient.factory);
     yield call(stitchRegister, { client: emailPassClient, credential: { email, password } });
-    yield put(registerUserSuccess({ user: true }));
-    window.location.href = '/app';
+    yield put(registerUserSuccess());
+    window.location.href = '/';
   } catch (error) {
     console.log(error);
   }
@@ -62,9 +62,31 @@ function* watchLoginRequest() {
   yield takeLatest(LOG_IN, login);
 }
 
+function stitchConfirmEmail({ client, token, tokenId }) {
+  return client.confirmUser(token, tokenId);
+}
+
+function* confirmEmail(action) {
+  try {
+    const { payload: { token, tokenId } } = action;
+    const emailPassClient = Stitch.defaultAppClient.auth
+      .getProviderClient(UserPasswordAuthProviderClient.factory);
+    yield call(stitchConfirmEmail, { client: emailPassClient, token, tokenId });
+    yield put(confirmEmailSuccess());
+    window.location.href = '/login';
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* watchConfirmEmailRequest() {
+  yield takeLatest(CONFIRM_EMAIL, confirmEmail);
+}
+
 const authSagas = [
   fork(watchRegisterUserRequest),
   fork(watchLoginRequest),
+  fork(watchConfirmEmailRequest),
 ];
 
 export default authSagas;
