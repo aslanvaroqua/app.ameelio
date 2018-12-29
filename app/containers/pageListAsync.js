@@ -29,6 +29,10 @@ export const Register = Loadable({
   loader: () => import('./Pages/Users/Register'),
   loading: Loading,
 });
+export const ConfirmEmail = Loadable({
+  loader: () => import('./Pages/Users/ConfirmEmail'),
+  loading: Loading,
+});
 export const ResetPassword = Loadable({
   loader: () => import('./Pages/Users/ResetPassword'),
   loading: Loading,

@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
+
+import requireAuth from './requireAuth';
 import Dashboard from '../Templates/Dashboard';
 import {
   Parent,
@@ -37,4 +39,4 @@ Application.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default Application;
+export default requireAuth(Application);

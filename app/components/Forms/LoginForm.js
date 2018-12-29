@@ -55,6 +55,8 @@ class LoginForm extends React.Component {
       pristine,
       submitting,
       deco,
+      onSubmitGoogle,
+      onSubmitFacebook,
     } = this.props;
     const { showPassword } = this.state;
     return (
@@ -86,13 +88,25 @@ class LoginForm extends React.Component {
           </Typography>
           <section className={classes.socmedLogin}>
             <div className={classes.btnArea}>
-              <Button variant="outlined" size="small" className={classes.redBtn} type="button">
+              <Button
+                variant="outlined"
+                size="small"
+                className={classes.redBtn}
+                type="button"
+                onClick={onSubmitGoogle}
+              >
                 <AllInclusive className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Socmed 1
+                Google
               </Button>
-              <Button variant="outlined" size="small" className={classes.blueBtn} type="button">
+              <Button
+                variant="outlined"
+                size="small"
+                className={classes.blueBtn}
+                type="button"
+                onClick={onSubmitFacebook}
+              >
                 <Brightness5 className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Socmed 2
+                Facebook
               </Button>
               <Button variant="outlined" size="small" className={classes.cyanBtn} type="button">
                 <People className={classNames(classes.leftIcon, classes.iconSmall)} />
@@ -166,6 +180,13 @@ LoginForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
   deco: PropTypes.bool.isRequired,
+  onSubmitFacebook: PropTypes.func,
+  onSubmitGoogle: PropTypes.func,
+};
+
+LoginForm.defaultProps = {
+  onSubmitFacebook: () => {},
+  onSubmitGoogle: () => {},
 };
 
 const LoginFormReduxed = reduxForm({

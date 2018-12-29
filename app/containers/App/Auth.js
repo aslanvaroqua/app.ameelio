@@ -4,6 +4,7 @@ import Outer from '../Templates/Outer';
 import {
   Login,
   Register,
+  ConfirmEmail,
   ResetPassword,
   ComingSoon,
   Maintenance,
@@ -17,6 +18,7 @@ class Auth extends React.Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/confirm-email" component={ConfirmEmail} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route path="/maintenance" component={Maintenance} />
           <Route path="/coming-soon" component={ComingSoon} />

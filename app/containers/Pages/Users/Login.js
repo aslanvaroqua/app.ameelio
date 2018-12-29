@@ -8,12 +8,34 @@ import styles from 'dan-components/Forms/user-jss';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
-import { login } from '../../../actions/AuthActions';
+import {
+  login,
+  facebookLogin,
+  googleLogin,
+  socialLoginRedirect,
+} from '../../../actions/AuthActions';
 
 class Login extends React.Component {
   // state = {
   //   valueForm: []
   // }
+  componentDidMount() {
+    const { stitchClient, socialLoginRedirect: socialLoginRedirectAction } = this.props;
+    if (stitchClient.auth.hasRedirectResult()) {
+      console.log('handle social redirect');
+      socialLoginRedirectAction();
+    }
+  }
+
+  submitGoogle = () => {
+    const { googleLogin: googleLoginAction } = this.props;
+    googleLoginAction();
+  };
+
+  submitFacebook = () => {
+    const { facebookLogin: facebookLoginAction } = this.props;
+    facebookLoginAction();
+  }
 
   submitForm(values) {
     console.log(values.toObject());
@@ -37,7 +59,11 @@ class Login extends React.Component {
         </Helmet>
         <div className={classes.container}>
           <div className={classes.userFormWrap}>
-            <LoginForm onSubmit={(values) => this.submitForm(values)} />
+            <LoginForm
+              onSubmit={(values) => this.submitForm(values)}
+              onSubmitGoogle={this.submitGoogle}
+              onSubmitFacebook={this.submitFacebook}
+            />
           </div>
         </div>
       </div>
@@ -48,9 +74,22 @@ class Login extends React.Component {
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
+  stitchClient: PropTypes.object.isRequired,
+  facebookLogin: PropTypes.func.isRequired,
+  googleLogin: PropTypes.func.isRequired,
+  socialLoginRedirect: PropTypes.func.isRequired,
 };
+
+function mapStateToProps(state) {
+  return { stitchClient: state.getIn(['auth', 'stitchClient']) };
+}
 
 export default compose(
   withStyles(styles),
-  connect(null, { login })
+  connect(mapStateToProps, {
+    login,
+    facebookLogin,
+    googleLogin,
+    socialLoginRedirect
+  })
 )(Login);

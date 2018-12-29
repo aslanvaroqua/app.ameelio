@@ -7,6 +7,10 @@ import {
   REGISTER_USER_SUCCESS,
   LOG_IN,
   LOG_IN_SUCESS,
+  CONFIRM_EMAIL,
+  CONFIRM_EMAIL_SUCCESS,
+  LOG_OUT,
+  LOG_OUT_SUCCESS,
 } from '../../actions/actionConstants';
 
 // MongoDB Stitch client
@@ -26,10 +30,15 @@ export default function reducer(state = initialImmutableState, action = {}) {
       return state;
     case REGISTER_USER:
     case LOG_IN:
+    case CONFIRM_EMAIL:
+    case LOG_OUT:
       return state.merge({ loading: true, error: '' });
-    case REGISTER_USER_SUCCESS:
     case LOG_IN_SUCESS:
-      return state.merge({ loading: false, user: action.payload.user });
+    case LOG_OUT_SUCCESS:
+      return state.merge({ loading: false, user: action.payload.user, error: '' });
+    case REGISTER_USER_SUCCESS:
+    case CONFIRM_EMAIL_SUCCESS:
+      return state.merge({ loading: false, error: '' });
     default:
       return state;
   }
