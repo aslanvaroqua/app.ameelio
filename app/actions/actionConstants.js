@@ -22,7 +22,8 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const LOG_IN = 'LOGIN';
 export const LOG_IN_SUCESS = 'LOGIN_SUCESS';
 export const FACEBOOK_LOG_IN = 'FACEBOOK_LOG_IN';
-export const FACEBOOK_LOG_IN_REDIRECT = 'FACEBOOK_LOG_IN_REDIRECT';
+export const GOOGLE_LOG_IN = 'GOOGLE_LOG_IN';
+export const SOCIAL_LOG_IN_REDIRECT = 'SOCIAL_LOG_IN_REDIRECT';
 
 // Confirm Email Actions
 export const CONFIRM_EMAIL = 'CONFIRM_EMAIL';

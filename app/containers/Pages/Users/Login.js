@@ -8,19 +8,29 @@ import styles from 'dan-components/Forms/user-jss';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
-import { login, facebookLogin, facebookLoginRedirect } from '../../../actions/AuthActions';
+import {
+  login,
+  facebookLogin,
+  googleLogin,
+  socialLoginRedirect,
+} from '../../../actions/AuthActions';
 
 class Login extends React.Component {
   // state = {
   //   valueForm: []
   // }
   componentDidMount() {
-    const { stitchClient, facebookLoginRedirect: facebookLoginRedirectAction } = this.props;
+    const { stitchClient, socialLoginRedirect: socialLoginRedirectAction } = this.props;
     if (stitchClient.auth.hasRedirectResult()) {
-      console.log('handle facebookLogin');
-      facebookLoginRedirectAction();
+      console.log('handle social redirect');
+      socialLoginRedirectAction();
     }
   }
+
+  submitGoogle = () => {
+    const { googleLogin: googleLoginAction } = this.props;
+    googleLoginAction();
+  };
 
   submitFacebook = () => {
     const { facebookLogin: facebookLoginAction } = this.props;
@@ -51,6 +61,7 @@ class Login extends React.Component {
           <div className={classes.userFormWrap}>
             <LoginForm
               onSubmit={(values) => this.submitForm(values)}
+              onSubmitGoogle={this.submitGoogle}
               onSubmitFacebook={this.submitFacebook}
             />
           </div>
@@ -65,7 +76,8 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
   stitchClient: PropTypes.object.isRequired,
   facebookLogin: PropTypes.func.isRequired,
-  facebookLoginRedirect: PropTypes.func.isRequired,
+  googleLogin: PropTypes.func.isRequired,
+  socialLoginRedirect: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -74,5 +86,10 @@ function mapStateToProps(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { login, facebookLogin, facebookLoginRedirect })
+  connect(mapStateToProps, {
+    login,
+    facebookLogin,
+    googleLogin,
+    socialLoginRedirect
+  })
 )(Login);

@@ -25,8 +25,12 @@ export const facebookLogin = () => ({
   type: types.FACEBOOK_LOG_IN,
 });
 
-export const facebookLoginRedirect = () => ({
-  type: types.FACEBOOK_LOG_IN_REDIRECT,
+export const googleLogin = () => ({
+  type: types.GOOGLE_LOG_IN,
+});
+
+export const socialLoginRedirect = () => ({
+  type: types.SOCIAL_LOG_IN_REDIRECT,
 });
 
 // Confirm Email Action Creators

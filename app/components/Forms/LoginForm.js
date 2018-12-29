@@ -55,6 +55,7 @@ class LoginForm extends React.Component {
       pristine,
       submitting,
       deco,
+      onSubmitGoogle,
       onSubmitFacebook,
     } = this.props;
     const { showPassword } = this.state;
@@ -87,9 +88,15 @@ class LoginForm extends React.Component {
           </Typography>
           <section className={classes.socmedLogin}>
             <div className={classes.btnArea}>
-              <Button variant="outlined" size="small" className={classes.redBtn} type="button">
+              <Button
+                variant="outlined"
+                size="small"
+                className={classes.redBtn}
+                type="button"
+                onClick={onSubmitGoogle}
+              >
                 <AllInclusive className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Socmed 1
+                Google
               </Button>
               <Button
                 variant="outlined"
@@ -174,10 +181,12 @@ LoginForm.propTypes = {
   submitting: PropTypes.bool.isRequired,
   deco: PropTypes.bool.isRequired,
   onSubmitFacebook: PropTypes.func,
+  onSubmitGoogle: PropTypes.func,
 };
 
 LoginForm.defaultProps = {
   onSubmitFacebook: () => {},
+  onSubmitGoogle: () => {},
 };
 
 const LoginFormReduxed = reduxForm({

@@ -11,11 +11,16 @@ import {
   UserPasswordCredential,
   UserPasswordAuthProviderClient,
   Stitch,
+  GoogleRedirectCredential,
   FacebookRedirectCredential,
 } from 'mongodb-stitch-browser-sdk';
 
 import {
-  REGISTER_USER, LOG_IN, CONFIRM_EMAIL, FACEBOOK_LOG_IN, FACEBOOK_LOG_IN_REDIRECT
+  REGISTER_USER,
+  LOG_IN, CONFIRM_EMAIL,
+  FACEBOOK_LOG_IN,
+  GOOGLE_LOG_IN,
+  SOCIAL_LOG_IN_REDIRECT,
 } from '../actions/actionConstants';
 import { registerUserSuccess, loginSuccess, confirmEmailSuccess } from '../actions/AuthActions';
 
@@ -86,15 +91,29 @@ function* watchConfirmEmailRequest() {
   yield takeLatest(CONFIRM_EMAIL, confirmEmail);
 }
 
-function stitchFacebookLogin({ client, credential }) {
+function stitchSocialLogin({ client, credential }) {
   return client.auth.loginWithRedirect(credential);
+}
+
+function* googleLogin() {
+  try {
+    const credential = new GoogleRedirectCredential();
+    const client = yield select(getStitchClient);
+    yield call(stitchSocialLogin, { client, credential });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* watchGoogleLoginRequest() {
+  yield takeLatest(GOOGLE_LOG_IN, googleLogin);
 }
 
 function* facebookLogin() {
   try {
     const credential = new FacebookRedirectCredential();
     const client = yield select(getStitchClient);
-    yield call(stitchFacebookLogin, { client, credential });
+    yield call(stitchSocialLogin, { client, credential });
   } catch (error) {
     console.log(error);
   }
@@ -104,30 +123,31 @@ function* watchFacebookLoginRequest() {
   yield takeLatest(FACEBOOK_LOG_IN, facebookLogin);
 }
 
-function stitchFacebookLoginRedirect({ client }) {
+function stitchSocialLoginRedirect({ client }) {
   return client.auth.handleRedirectResult();
 }
 
-function* facebookLoginRedirect() {
+function* socialLoginRedirect() {
   try {
     const client = yield select(getStitchClient);
-    yield call(stitchFacebookLoginRedirect, { client });
+    yield call(stitchSocialLoginRedirect, { client });
     window.location.href = '/app';
   } catch (error) {
     console.log(error);
   }
 }
 
-function* watchFacebookLoginRedirect() {
-  yield takeLatest(FACEBOOK_LOG_IN_REDIRECT, facebookLoginRedirect);
+function* watchSocialLoginRedirect() {
+  yield takeLatest(SOCIAL_LOG_IN_REDIRECT, socialLoginRedirect);
 }
 
 const authSagas = [
   fork(watchRegisterUserRequest),
   fork(watchLoginRequest),
   fork(watchConfirmEmailRequest),
+  fork(watchGoogleLoginRequest),
   fork(watchFacebookLoginRequest),
-  fork(watchFacebookLoginRedirect),
+  fork(watchSocialLoginRedirect),
 ];
 
 export default authSagas;
