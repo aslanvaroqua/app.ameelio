@@ -33,6 +33,16 @@ export const socialLoginRedirect = () => ({
   type: types.SOCIAL_LOG_IN_REDIRECT,
 });
 
+// Log out Action Creators
+export const logout = () => ({
+  type: types.LOG_OUT,
+});
+
+export const logoutSuccess = ({ user }) => ({
+  type: types.LOG_OUT_SUCCESS,
+  payload: { user }
+});
+
 // Confirm Email Action Creators
 export const confirmEmail = (token, tokenId) => ({
   type: types.CONFIRM_EMAIL,

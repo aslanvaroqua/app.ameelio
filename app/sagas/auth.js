@@ -17,12 +17,19 @@ import {
 
 import {
   REGISTER_USER,
-  LOG_IN, CONFIRM_EMAIL,
+  LOG_IN,
+  CONFIRM_EMAIL,
   FACEBOOK_LOG_IN,
   GOOGLE_LOG_IN,
   SOCIAL_LOG_IN_REDIRECT,
+  LOG_OUT,
 } from '../actions/actionConstants';
-import { registerUserSuccess, loginSuccess, confirmEmailSuccess } from '../actions/AuthActions';
+import {
+  registerUserSuccess,
+  loginSuccess,
+  confirmEmailSuccess,
+  logoutSuccess,
+} from '../actions/AuthActions';
 
 function getStitchClient(state) {
   return state.getIn(['auth', 'stitchClient']);
@@ -141,6 +148,25 @@ function* watchSocialLoginRedirect() {
   yield takeLatest(SOCIAL_LOG_IN_REDIRECT, socialLoginRedirect);
 }
 
+function stitchLogout({ client }) {
+  return client.auth.logout();
+}
+
+function* logout() {
+  try {
+    const client = yield select(getStitchClient);
+    yield call(stitchLogout, { client });
+    yield put(logoutSuccess({ user: false }));
+    // window.location.href = '/';
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* watchLogoutRequest() {
+  yield takeLatest(LOG_OUT, logout);
+}
+
 const authSagas = [
   fork(watchRegisterUserRequest),
   fork(watchLoginRequest),
@@ -148,6 +174,7 @@ const authSagas = [
   fork(watchGoogleLoginRequest),
   fork(watchFacebookLoginRequest),
   fork(watchSocialLoginRedirect),
+  fork(watchLogoutRequest),
 ];
 
 export default authSagas;

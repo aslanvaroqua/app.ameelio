@@ -22,6 +22,10 @@ import dummy from 'dan-api/dummy/dummyContents';
 import messageStyles from 'dan-styles/Messages.scss';
 import avatarApi from 'dan-api/images/avatars';
 import link from 'dan-api/ui/link';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+
+import { logout } from '../../actions/AuthActions';
 import styles from './header-jss';
 
 class UserMenu extends React.Component {
@@ -40,6 +44,12 @@ class UserMenu extends React.Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null, openMenu: null });
+  };
+
+  handleLogout = () => {
+    const { logout: logoutAction } = this.props;
+    this.handleClose();
+    logoutAction();
   };
 
   render() {
@@ -149,7 +159,7 @@ class UserMenu extends React.Component {
             </ListItemIcon>
           </MenuItem>
           <Divider />
-          <MenuItem onClick={this.handleClose} component={Link} to="/">
+          <MenuItem onClick={this.handleLogout} component={Link} to="/">
             <ListItemIcon>
               <ExitToApp />
             </ListItemIcon>
@@ -164,10 +174,14 @@ class UserMenu extends React.Component {
 UserMenu.propTypes = {
   classes: PropTypes.object.isRequired,
   dark: PropTypes.bool,
+  logout: PropTypes.func.isRequired,
 };
 
 UserMenu.defaultProps = {
   dark: false
 };
 
-export default withStyles(styles)(UserMenu);
+export default compose(
+  withStyles(styles),
+  connect(null, { logout })
+)(UserMenu);

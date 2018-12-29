@@ -25,6 +25,10 @@ export const FACEBOOK_LOG_IN = 'FACEBOOK_LOG_IN';
 export const GOOGLE_LOG_IN = 'GOOGLE_LOG_IN';
 export const SOCIAL_LOG_IN_REDIRECT = 'SOCIAL_LOG_IN_REDIRECT';
 
+// Logout Actions
+export const LOG_OUT = 'LOG_OUT';
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+
 // Confirm Email Actions
 export const CONFIRM_EMAIL = 'CONFIRM_EMAIL';
 export const CONFIRM_EMAIL_SUCCESS = 'CONFIRM_EMAIL_SUCCESS';
