@@ -11,9 +11,12 @@ import {
   UserPasswordCredential,
   UserPasswordAuthProviderClient,
   Stitch,
+  FacebookRedirectCredential,
 } from 'mongodb-stitch-browser-sdk';
 
-import { REGISTER_USER, LOG_IN, CONFIRM_EMAIL } from '../actions/actionConstants';
+import {
+  REGISTER_USER, LOG_IN, CONFIRM_EMAIL, FACEBOOK_LOG_IN, FACEBOOK_LOG_IN_REDIRECT
+} from '../actions/actionConstants';
 import { registerUserSuccess, loginSuccess, confirmEmailSuccess } from '../actions/AuthActions';
 
 function getStitchClient(state) {
@@ -83,10 +86,48 @@ function* watchConfirmEmailRequest() {
   yield takeLatest(CONFIRM_EMAIL, confirmEmail);
 }
 
+function stitchFacebookLogin({ client, credential }) {
+  return client.auth.loginWithRedirect(credential);
+}
+
+function* facebookLogin() {
+  try {
+    const credential = new FacebookRedirectCredential();
+    const client = yield select(getStitchClient);
+    yield call(stitchFacebookLogin, { client, credential });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* watchFacebookLoginRequest() {
+  yield takeLatest(FACEBOOK_LOG_IN, facebookLogin);
+}
+
+function stitchFacebookLoginRedirect({ client }) {
+  return client.auth.handleRedirectResult();
+}
+
+function* facebookLoginRedirect() {
+  try {
+    const client = yield select(getStitchClient);
+    yield call(stitchFacebookLoginRedirect, { client });
+    window.location.href = '/app';
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* watchFacebookLoginRedirect() {
+  yield takeLatest(FACEBOOK_LOG_IN_REDIRECT, facebookLoginRedirect);
+}
+
 const authSagas = [
   fork(watchRegisterUserRequest),
   fork(watchLoginRequest),
   fork(watchConfirmEmailRequest),
+  fork(watchFacebookLoginRequest),
+  fork(watchFacebookLoginRedirect),
 ];
 
 export default authSagas;

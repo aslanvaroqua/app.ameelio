@@ -21,6 +21,8 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 // Login Actions
 export const LOG_IN = 'LOGIN';
 export const LOG_IN_SUCESS = 'LOGIN_SUCESS';
+export const FACEBOOK_LOG_IN = 'FACEBOOK_LOG_IN';
+export const FACEBOOK_LOG_IN_REDIRECT = 'FACEBOOK_LOG_IN_REDIRECT';
 
 // Confirm Email Actions
 export const CONFIRM_EMAIL = 'CONFIRM_EMAIL';

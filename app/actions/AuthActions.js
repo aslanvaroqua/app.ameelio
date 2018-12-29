@@ -21,6 +21,14 @@ export const loginSuccess = ({ user }) => ({
   payload: { user }
 });
 
+export const facebookLogin = () => ({
+  type: types.FACEBOOK_LOG_IN,
+});
+
+export const facebookLoginRedirect = () => ({
+  type: types.FACEBOOK_LOG_IN_REDIRECT,
+});
+
 // Confirm Email Action Creators
 export const confirmEmail = (token, tokenId) => ({
   type: types.CONFIRM_EMAIL,
