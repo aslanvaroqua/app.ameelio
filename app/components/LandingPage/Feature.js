@@ -23,6 +23,7 @@ class Feature extends React.Component {
   state = {
     featureList: [
       createFeatureData('ios-infinite-outline', 'Letters', 'Sending letters and photos to an inmate in the USA just got easier. Our service is the fast, free way of getting your messages and photos delivered to incarcerated loved ones.'),
+      createFeatureData('ios-infinite-outline', 'Connect', 'Send real-time e-messages and video chat from any device. (Coming soon)'),
       createFeatureData('ios-ionic-outline', 'Forum', 'Real time e-messaging with video chat coming soon and a forum for connecting with a network of families, friends, and advocates.'),
       createFeatureData('ios-infinite-outline', 'Trends', 'View, explore, and export data from the justice system and see predictions made through machine-learning algorithms.')
     ]
@@ -37,7 +38,7 @@ class Feature extends React.Component {
           <Title title="Main Feature" align="center" monocolor={slideMode && true} />
           <Grid container className={classes.root} spacing={40}>
             { featureList.map(item => (
-              <Grid key={item.id.toString()} item xs={12} md={4}>
+              <Grid key={item.id.toString()} item xs={12} md={3}>
                 <Typography component="h4" variant="h6">
                   <span className={classes.icon}>
                     <Ionicon icon={item.icon} />

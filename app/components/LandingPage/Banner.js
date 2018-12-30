@@ -9,7 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { withStyles } from '@material-ui/core/styles';
 import link from 'dan-api/ui/link';
+
 import styles from './landingStyle-jss';
+import crypto from '../../../public/images/screen/crypto.jpg';
+import personal from '../../../public/images/screen/personal.jpg';
+import crm from '../../../public/images/screen/crm.jpg';
 
 function ParallaxDeco(props) {
   const { classes } = props;
@@ -100,15 +104,15 @@ class Banner extends React.Component {
           <div className={classes.previewApp}>
             <Hidden smDown>
               <div className={classNames(classes.m2, classes.screen, slideMode ? classes.bottom : '')}>
-                <img src="/images/screen/crypto.jpg" alt="crm dashboard" />
+                <img src={crypto} alt="crypto dashboard" />
               </div>
             </Hidden>
             <div className={classNames(classes.m1, classes.screen)}>
-              <img src="/images/screen/personal.jpg" alt="personal dashboard" />
+              <img src={personal} alt="personal dashboard" />
             </div>
             <Hidden smDown>
               <div className={classNames(classes.m3, classes.screen, slideMode ? classes.bottom : '')}>
-                <img src="/images/screen/crm.jpg" alt="crypto dashboard" />
+                <img src={crm} alt="crm dashboard" />
               </div>
             </Hidden>
           </div>
