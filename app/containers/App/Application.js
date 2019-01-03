@@ -11,7 +11,8 @@ import {
   Form,
   Table,
   Error,
-  NotFound
+  NotFound,
+  Letters,
 } from '../pageListAsync';
 
 class Application extends React.Component {
@@ -22,6 +23,7 @@ class Application extends React.Component {
         <Switch>
           <Route exact path="/app" component={BlankPage} />
           <Route path="/app/dashboard" component={DashboardPage} />
+          <Route path="/app/letters" component={Letters} />
           <Route path="/app/form" component={Form} />
           <Route path="/app/table" component={Table} />
           <Route path="/app/page-list" component={Parent} />

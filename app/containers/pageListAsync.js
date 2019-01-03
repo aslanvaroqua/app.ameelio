@@ -61,3 +61,7 @@ export const Parent = Loadable({
   loader: () => import('./Parent'),
   loading: Loading,
 });
+export const Letters = Loadable({
+  loader: () => import('./Pages/Letters'),
+  loading: Loading,
+});
