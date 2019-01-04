@@ -6,14 +6,14 @@ import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import Ionicon from 'react-ionicons';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import UserMenu from './UserMenu';
-import SearchUi from '../Search/SearchUi';
+// import SearchUi from '../Search/SearchUi';
 import styles from './header-jss';
 
 const elem = document.documentElement;
@@ -71,7 +71,7 @@ class Header extends React.Component {
       mode,
       title,
       openGuide,
-      history
+      // history
     } = this.props;
     const { fullScreen, open } = this.state;
 
@@ -137,17 +137,17 @@ class Header extends React.Component {
               </Typography>
             </div>
           </Hidden>
-          <div className={classes.searchWrapper}>
+          {/* <div className={classes.searchWrapper}>
             <div className={classNames(classes.wrapper, classes.light)}>
               <div className={classes.search}>
                 <SearchIcon />
               </div>
               <SearchUi history={history} />
             </div>
-          </div>
-          <Hidden xsDown>
+          </div> */}
+          {/* <Hidden xsDown>
             <span className={classes.separatorV} />
-          </Hidden>
+          </Hidden> */}
           <UserMenu />
         </Toolbar>
       </AppBar>
@@ -167,7 +167,7 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   changeMode: PropTypes.func.isRequired,
   openGuide: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
+  // history: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Header);

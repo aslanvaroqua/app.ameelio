@@ -15,6 +15,7 @@ import Chip from '@material-ui/core/Chip';
 import Ionicon from 'react-ionicons';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+
 import styles from './sidebar-jss';
 
 class MainMenu extends React.Component {
@@ -29,7 +30,7 @@ class MainMenu extends React.Component {
       classes,
       openSubMenu,
       open,
-      dataMenu
+      dataMenu,
     } = this.props;
     const getMenus = menuArray => menuArray.map((item, index) => {
       if (item.child) {
@@ -91,7 +92,7 @@ class MainMenu extends React.Component {
           className={classes.nested}
           activeClassName={classes.active}
           component={NavLink}
-          to={item.link}
+          to={`/app/${item.link}`}
           onClick={() => this.handleClick()}
         >
           {item.icon && (
