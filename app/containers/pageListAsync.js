@@ -69,3 +69,7 @@ export const LettersCompose = Loadable({
   loader: () => import('./Pages/Letters/Compose'),
   loading: Loading,
 });
+export const LettersReview = Loadable({
+  loader: () => import('./Pages/Letters/Review'),
+  loading: Loading,
+});
