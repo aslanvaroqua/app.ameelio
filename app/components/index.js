@@ -14,6 +14,7 @@ export RegisterForm from './Forms/RegisterForm';
 export ResetForm from './Forms/ResetForm';
 export Notification from './Notification/Notification';
 export SearchInmateForm from './Forms/SearchInmateForm';
+export LetterComposeForm from './Forms/LetterComposeForm';
 // Table
 export EmptyData from './Tables/EmptyData';
 // Error

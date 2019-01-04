@@ -25,7 +25,7 @@ const styles = theme => ({
   },
 });
 
-class TextFields extends PureComponent {
+class SearchInmateForm extends PureComponent {
   state = {
     inmateName: '',
     inmateNumber: '',
@@ -49,7 +49,7 @@ class TextFields extends PureComponent {
       <Fragment>
         <form className={classes.container} onSubmit={this.handleSubmit}>
           <Grid container direction="row" alignItems="center">
-            <Grid item md={6} xl={4} container direction="column" alignItems="flex-start" justifyContent="space-around">
+            <Grid item md={6} xl={4} container direction="column" alignItems="flex-start" justify="space-around">
               <Grid item md={4}>
                 <Typography variant="h6" component="h3">Inmate Name</Typography>
               </Grid>
@@ -110,8 +110,8 @@ class TextFields extends PureComponent {
   }
 }
 
-TextFields.propTypes = {
+SearchInmateForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(SearchInmateForm);

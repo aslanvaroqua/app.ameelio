@@ -13,6 +13,7 @@ import {
   Error,
   NotFound,
   Letters,
+  LettersCompose,
 } from '../pageListAsync';
 
 class Application extends React.Component {
@@ -23,7 +24,8 @@ class Application extends React.Component {
         <Switch>
           <Route exact path="/app" component={BlankPage} />
           <Route path="/app/dashboard" component={DashboardPage} />
-          <Route path="/app/letters" component={Letters} />
+          <Route exact path="/app/letters" component={Letters} />
+          <Route path="/app/letters/compose" component={LettersCompose} />
           <Route path="/app/form" component={Form} />
           <Route path="/app/table" component={Table} />
           <Route path="/app/page-list" component={Parent} />

@@ -39,9 +39,11 @@ class PapperBlock extends React.Component {
               </Typography>
             </div>
           </div>
-          <section className={classNames(classes.content, whiteBg && classes.whiteBg, overflowX && classes.overflowX)}>
-            {children}
-          </section>
+          {children && (
+            <section className={classNames(classes.content, whiteBg && classes.whiteBg, overflowX && classes.overflowX)}>
+              {children}
+            </section>
+          )}
         </Paper>
       </div>
     );
@@ -53,7 +55,7 @@ PapperBlock.propTypes = {
   title: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
   icon: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   whiteBg: PropTypes.bool,
   colorMode: PropTypes.bool,
   noMargin: PropTypes.bool,
@@ -65,7 +67,8 @@ PapperBlock.defaultProps = {
   noMargin: false,
   colorMode: false,
   overflowX: false,
-  icon: 'ios-bookmark-outline'
+  icon: 'ios-bookmark-outline',
+  children: null,
 };
 
 export default compose(
