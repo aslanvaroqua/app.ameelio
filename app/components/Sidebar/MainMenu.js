@@ -33,7 +33,6 @@ class MainMenu extends React.Component {
       dataMenu,
     } = this.props;
     const getMenus = menuArray => menuArray.map((item, index) => {
-      console.log('menu item', item);
       if (item.child) {
         return (
           <div key={index.toString()}>

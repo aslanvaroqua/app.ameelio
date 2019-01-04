@@ -12,6 +12,10 @@ import DropMenuLayout from './layouts/DropMenuLayout';
 import MegaMenuLayout from './layouts/MegaMenuLayout';
 import styles from './appStyles-jss';
 
+const mapPlacesToTitle = {
+  letters: 'SEND LETTERS AND PHOTOS',
+};
+
 class Dashboard extends React.Component {
   state = {
     transform: 0,
@@ -77,7 +81,10 @@ class Dashboard extends React.Component {
     const { openGuide, transform } = this.state;
     const titleException = ['/app', '/app/crm-dashboard', '/app/crypto-dashboard'];
     const parts = history.location.pathname.split('/');
-    const place = parts[parts.length - 1].replace('-', ' ');
+    // Custom title for pages
+    let place = mapPlacesToTitle[parts[parts.length - 1]];
+    place = '';
+    // const place = parts[parts.length - 1].replace('-', ' ');
     return (
       <div
         className={
