@@ -5,6 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import InmateCard from '../CardPaper/InmateCard';
+import { inmatesMockList } from '../../containers/Pages/Letters/dummyData';
 
 const styles = theme => ({
   demo: {
@@ -30,6 +34,8 @@ class SearchInmateForm extends PureComponent {
     inmateName: '',
     inmateNumber: '',
     state: '',
+    loading: false,
+    inmatesList: [],
   };
 
   handleChange = event => {
@@ -40,11 +46,29 @@ class SearchInmateForm extends PureComponent {
   handleSubmit = event => {
     event.preventDefault();
     console.log('Search inmate');
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ inmatesList: inmatesMockList, loading: false });
+    }, 1000);
+  };
+
+  onClickMail = (inmate) => {
+    const { history } = this.props;
+    history.push({
+      pathname: '/app/letters/compose',
+      state: { inmate },
+    });
   };
 
   render() {
     const { classes } = this.props;
-    const { inmateName, inmateNumber, state } = this.state;
+    const {
+      inmateName,
+      inmateNumber,
+      state,
+      loading,
+      inmatesList,
+    } = this.state;
     return (
       <Fragment>
         <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -105,6 +129,29 @@ class SearchInmateForm extends PureComponent {
             Search
           </Button>
         </form>
+        {loading && (
+          <Grid container alignItems="center" justify="center">
+            <CircularProgress
+              className={classes.progress}
+              color="secondary"
+            />
+          </Grid>
+        )}
+        {inmatesList.length > 0 && (
+          <Grid container alignItems="center" spacing={40} style={{ marginTop: 40, marginBottom: 20 }}>
+            {inmatesList.map((inmate) => (
+              <Grid item xs={12} sm={6} md={4} key={inmate.id}>
+                <InmateCard inmateInfo={inmate} onClickMail={this.onClickMail}>
+                  <Typography variant="h6" component="h3">
+                    {inmate.name.toUpperCase()}
+                    ,
+                    {inmate.number}
+                  </Typography>
+                </InmateCard>
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Fragment>
     );
   }
@@ -112,6 +159,7 @@ class SearchInmateForm extends PureComponent {
 
 SearchInmateForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(SearchInmateForm);

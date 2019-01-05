@@ -1,5 +1,6 @@
 import pink from '@material-ui/core/colors/pink';
 import lightGreen from '@material-ui/core/colors/lightGreen';
+import blue from '@material-ui/core/colors/blue';
 import dark from '@material-ui/core/colors/blueGrey';
 import { fade, darken } from '@material-ui/core/styles/colorManipulator';
 import roundedThumbLight from 'dan-images/decoration/roundedThumbLight.png';
@@ -22,6 +23,12 @@ const styles = theme => ({
   },
   shared: {
     color: lightGreen[500]
+  },
+  contact: {
+    color: blue[500]
+  },
+  contactMail: {
+    color: blue[500]
   },
   num: {
     fontSize: 14,
@@ -402,6 +409,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.common.black,
     opacity: 0.4,
     transition: theme.transitions.create('opacity'),
+  },
+  progress: {
+    margin: theme.spacing.unit * 2,
   },
 });
 

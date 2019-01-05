@@ -33,3 +33,5 @@ export Testimonials from './LandingPage/Testimonials';
 export SideNav from './LandingPage/SideNav';
 // Accordion
 export SimpleAccordion from './Accordion/SimpleAccordion';
+// Cards
+export InmateCard from './CardPaper/InmateCard';
