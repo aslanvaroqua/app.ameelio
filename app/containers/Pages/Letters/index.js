@@ -1,19 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import { PapperBlock, SimpleAccordion, SearchInmateForm } from 'dan-components';
 
-const accordionContent = [
-  { heading: '1. Search', content: 'Find any prisoner in the U.S. using our nationwide inmate databse.' },
-  { heading: '2. Compose', content: 'Simply type and attach photos.' },
-  { heading: '3. Send', content: 'We convert each letter into physical mail, and ship it using a trsuted partner.' },
-  { heading: '4. Receive', content: 'We include a pre-addressed return envelope in each letter we mail.' },
-];
+import { accordionContent } from './dummyData';
 
 class Letters extends React.Component {
   render() {
     const title = brand.name + ' - Letters';
     const description = brand.desc;
+    const { history } = this.props;
     return (
       <div>
         <Helmet>
@@ -34,11 +31,14 @@ class Letters extends React.Component {
           <SimpleAccordion content={accordionContent} />
         </PapperBlock>
         <PapperBlock title="Search inmate" desc="" icon="">
-          <SearchInmateForm />
+          <SearchInmateForm history={history} />
         </PapperBlock>
       </div>
     );
   }
 }
 
+Letters.propTypes = {
+  history: PropTypes.object.isRequired,
+};
 export default Letters;
