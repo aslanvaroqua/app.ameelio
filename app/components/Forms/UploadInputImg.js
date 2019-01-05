@@ -1,27 +1,21 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+
 import MaterialDropZone from './MaterialDropZone';
 
 class UploadInputImg extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      files: [],
-    };
-  }
-
   render() {
-    const { files } = this.state;
+    const { updateImages } = this.props;
     return (
       <Fragment>
         <div>
           <MaterialDropZone
             acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
-            files={files}
             showPreviews
             maxSize={5000000}
             filesLimit={5}
             text="Drag and drop image(s) here or click"
+            updateImages={updateImages}
           />
         </div>
       </Fragment>
@@ -29,4 +23,7 @@ class UploadInputImg extends React.Component {
   }
 }
 
+UploadInputImg.propTypes = {
+  updateImages: PropTypes.func.isRequired,
+};
 export default UploadInputImg;

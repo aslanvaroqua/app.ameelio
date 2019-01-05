@@ -8,6 +8,15 @@ import Grid from '@material-ui/core/Grid';
 
 import UploadInputImg from './UploadInputImg';
 
+const getBase64 = (file) => (
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  })
+);
+
 const styles = theme => ({
   demo: {
     height: 'auto',
@@ -30,6 +39,8 @@ const styles = theme => ({
 class LetterComposeForm extends PureComponent {
   state = {
     message: '',
+    error: false,
+    images: [],
   };
 
   handleChange = event => {
@@ -37,17 +48,44 @@ class LetterComposeForm extends PureComponent {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Review letter');
+    const { history, inmate } = this.props;
+    const { message, images } = this.state;
+    if (message.length === 0) {
+      this.setState({ error: true });
+    } else {
+      this.setState({ error: false });
+      console.log('Review letter');
+      // Get images in base64 string representation
+      try {
+        const imagesPromises = images.map(image => getBase64(image));
+        const imagesBase64 = await Promise.all(imagesPromises);
+        console.log(imagesBase64);
+        history.push({
+          pathname: '/app/letters/review',
+          state: {
+            inmate,
+            message,
+            images: imagesBase64,
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  updateImages = (images) => {
+    this.setState({ images });
   };
 
   render() {
     const { classes } = this.props;
-    const { message } = this.state;
+    const { message, error } = this.state;
     return (
       <Fragment>
-        <UploadInputImg />
+        <UploadInputImg updateImages={this.updateImages} />
         <form className={classes.container} onSubmit={this.handleSubmit}>
           <Input
             name="message"
@@ -63,6 +101,11 @@ class LetterComposeForm extends PureComponent {
             rows={10}
           />
           <Grid container direction="column">
+            {error && (
+              <Typography color="error" variant="subtitle2" component="p" style={{ marginLeft: 25 }}>
+                Please compose a message.
+              </Typography>
+            )}
             <Typography variant="subtitle2" component="p" style={{ marginLeft: 25 }}>
               Characters left:
               {' '}
@@ -82,6 +125,8 @@ class LetterComposeForm extends PureComponent {
 
 LetterComposeForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  inmate: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(LetterComposeForm);

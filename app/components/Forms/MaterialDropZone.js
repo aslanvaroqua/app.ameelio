@@ -54,7 +54,7 @@ class MaterialDropZone extends React.Component {
 
   onDrop(filesVal) {
     const { files } = this.state;
-    const { filesLimit } = this.props;
+    const { filesLimit, updateImages } = this.props;
     let oldFiles = files;
     const filesLimitVal = filesLimit || '3';
     oldFiles = oldFiles.concat(filesVal);
@@ -65,6 +65,7 @@ class MaterialDropZone extends React.Component {
       });
     } else {
       this.setState({ files: oldFiles });
+      updateImages(oldFiles);
     }
   }
 
@@ -88,6 +89,8 @@ class MaterialDropZone extends React.Component {
 
     thisFiles.splice(fileIndex, 1);
     this.setState({ files: thisFiles });
+    const { updateImages } = this.props;
+    updateImages(thisFiles);
   }
 
   render() {
@@ -188,7 +191,7 @@ class MaterialDropZone extends React.Component {
 }
 
 MaterialDropZone.propTypes = {
-  files: PropTypes.array.isRequired,
+  files: PropTypes.array,
   text: PropTypes.string.isRequired,
   acceptedFiles: PropTypes.array,
   showPreviews: PropTypes.bool.isRequired,
@@ -196,11 +199,13 @@ MaterialDropZone.propTypes = {
   maxSize: PropTypes.number.isRequired,
   filesLimit: PropTypes.number.isRequired,
   classes: PropTypes.object.isRequired,
+  updateImages: PropTypes.func.isRequired,
 };
 
 MaterialDropZone.defaultProps = {
   acceptedFiles: [],
   showButton: false,
+  files: [],
 };
 
 export default withStyles(styles)(MaterialDropZone);
