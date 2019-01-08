@@ -32,8 +32,12 @@ class InmateCard extends React.Component {
               {inmateInfo.number}
             </Typography>
             <Typography variant="subtitle2" component="h3">{inmateInfo.facility}</Typography>
-            <Typography variant="subtitle2" component="h3">{inmateInfo.zip}</Typography>
-            <Typography variant="subtitle2" component="h3">{inmateInfo.address}</Typography>
+            <Typography variant="subtitle2" component="h3">
+              {inmateInfo.addressLine1}
+              ,&nbsp;
+              {inmateInfo.pBox}
+            </Typography>
+            <Typography variant="subtitle2" component="h3">{inmateInfo.addressLine2}</Typography>
           </Popover>
           <IconButton aria-label="Contact mail" className={classes.button} onClick={() => onClickMail(inmateInfo)}>
             <ContactMailIcon className={classes.contactMail} />
