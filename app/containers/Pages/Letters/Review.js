@@ -6,13 +6,44 @@ import { PapperBlock } from 'dan-components';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
 
+import { sendLetter } from '../../../actions/LettersActions';
 import crypto from '../../../../public/images/screen/crypto.jpg';
 import { senderMockData } from './dummyData';
 
 class LettersReview extends React.Component {
   clickHandler = () => {
     console.log('Send letter');
+    const { sendLetter: sendLetterAction, location } = this.props;
+    if (location.state) {
+      const {
+        state: {
+          images,
+          inmate: {
+            name,
+            number,
+            addressLine1,
+            addressLine2,
+            pBox,
+            zip,
+          },
+          message,
+        },
+      } = location;
+      const recipientAddress = {
+        recipient: `${name}, ${number}`,
+        primary_line: `${addressLine1}, ${pBox}`,
+        secondary_line: addressLine2,
+        zip_code: zip,
+      };
+      sendLetterAction(
+        images[0],
+        recipientAddress,
+        senderMockData,
+        message,
+      );
+    }
   };
 
   render() {
@@ -89,5 +120,6 @@ class LettersReview extends React.Component {
 
 LettersReview.propTypes = {
   location: PropTypes.object.isRequired,
+  sendLetter: PropTypes.func.isRequired,
 };
-export default LettersReview;
+export default connect(null, { sendLetter })(LettersReview);

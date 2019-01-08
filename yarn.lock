@@ -8360,6 +8360,15 @@ mongodb-stitch-browser-sdk@^4.1.2:
     mongodb-stitch-browser-core "^4.1.2"
     mongodb-stitch-browser-services-mongodb-remote "^4.1.2"
 
+mongodb-stitch-browser-services-aws@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/mongodb-stitch-browser-services-aws/-/mongodb-stitch-browser-services-aws-4.1.2.tgz#6bdc15a178e07858e3ae346606b70ea873b36568"
+  integrity sha512-ntZt1FsnaEjU9mdWZaPnkmqAwQwQCU9ncCAPQsUz2wjo1muyt/jPtufTktkyE2YXqdkzDuBg9gKajum33gNkyA==
+  dependencies:
+    bson "4.0.0"
+    mongodb-stitch-browser-core "^4.1.2"
+    mongodb-stitch-core-services-aws "^4.1.2"
+
 mongodb-stitch-browser-services-mongodb-remote@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/mongodb-stitch-browser-services-mongodb-remote/-/mongodb-stitch-browser-services-mongodb-remote-4.1.2.tgz#3ba48afe0283a1cf1a0bf2a3fa31a80e83da076b"
@@ -8376,6 +8385,14 @@ mongodb-stitch-core-sdk@^4.1.2:
     base64-js "^1.3.0"
     bson "4.0.0"
     cross-fetch "^2.2.3"
+
+mongodb-stitch-core-services-aws@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/mongodb-stitch-core-services-aws/-/mongodb-stitch-core-services-aws-4.1.2.tgz#eb712a0054f93a4c4f5a96c4425ccc9a8fb4bae3"
+  integrity sha512-YHaLi0U4W0Ep29Wlerud5ZTm9sVvuZ6jb9FrXjjHJjWEs77BFor3L5o5XnvvWsfds0opDhHJQrdTCbC7TLYEqg==
+  dependencies:
+    bson "4.0.0"
+    mongodb-stitch-core-sdk "^4.1.2"
 
 mongodb-stitch-core-services-mongodb-remote@^4.1.2:
   version "4.1.2"

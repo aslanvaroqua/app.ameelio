@@ -23,12 +23,6 @@ export const verifyRecipientAddressFailure = ({ recipientAddressError }) => ({
   payload: { recipientAddressError },
 });
 
-// Verify sender address failure
-export const verifySenderAddressFailure = ({ senderAddressError }) => ({
-  type: types.VERIFY_SENDER_ADDRESS_FAILURE,
-  payload: { senderAddressError },
-});
-
 // Send letter failure
 export const sendLetterFailure = ({ sendLetterError }) => ({
   type: types.SEND_LETTER_FAILURE,

@@ -5,14 +5,14 @@ import {
   put,
   select,
 } from 'redux-saga/effects';
-import { Stitch, AwsServiceClient, AwsRequest } from 'mongodb-stitch-browser-sdk';
+import { Stitch } from 'mongodb-stitch-browser-sdk';
+import { AwsServiceClient, AwsRequest } from 'mongodb-stitch-browser-services-aws';
 import uuidv4 from 'uuid/v4';
 
 import { SEND_LETTER } from '../actions/actionConstants';
 import {
   uploadImageFailure,
   verifyRecipientAddressFailure,
-  verifySenderAddressFailure,
   sendLetterFailure,
   sendLetterSuccess,
 } from '../actions/LettersActions';
@@ -21,21 +21,22 @@ function getStitchClient(state) {
   return state.getIn(['auth', 'stitchClient']);
 }
 
-function dataURItoBlob(dataURI) {
-  const binary = atob(dataURI.split(',')[1]);
-  const array = [];
-  for (let i = 0; i < binary.length; i += 1) {
-    array.push(binary.charCodeAt(i));
-  }
-  return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
-}
+// function dataURItoBlob(dataURI) {
+//   const binary = atob(dataURI.split(',')[1]);
+//   const array = [];
+//   for (let i = 0; i < binary.length; i += 1) {
+//     array.push(binary.charCodeAt(i));
+//   }
+
+//   return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
+// }
 
 function s3Upload({ aws, request }) {
   return aws.execute(request.build());
 }
 
-function verifyAddress({ address }) {
-  return Stitch.defaultAppClient.callFunction('validateAddress', [address]);
+function validateAddress({ recipientAddress }) {
+  return Stitch.defaultAppClient.callFunction('validateAddress', [recipientAddress]);
 }
 
 function sendLetterRequest({
@@ -59,12 +60,18 @@ function* sendLetterSaga({
   message,
 }) {
   try {
-    yield call(sendLetterRequest, {
+    const result = yield call(sendLetterRequest, {
       imageUrl,
       recipientAddress,
       senderAddress,
       message,
     });
+    console.log('letter sent successfully', result);
+    if (result.error) {
+      yield put(sendLetterFailure({
+        sendLetterError: result.error.message,
+      }));
+    }
     yield put(sendLetterSuccess());
   } catch (error) {
     console.log(error);
@@ -91,26 +98,33 @@ function* verifyAddresses({
     undeliverable: 'The address is not deliverable according to the USPS.',
   };
   try {
-    const recipientVerifiedAddress = yield call(verifyAddress, { recipientAddress });
-    const senderVerifiedAddress = yield call(verifyAddress, { senderAddress });
-    if (deliverErrors.includes(recipientVerifiedAddress.deliverability)) {
+    const result = yield call(validateAddress, { recipientAddress });
+    console.log('verify recipientAddress result', result);
+    if (deliverErrors.includes(result.deliverability)) {
       yield put(verifyRecipientAddressFailure({
-        recipientAddressError: deliverErrorsObj[recipientVerifiedAddress.deliverability],
-      }));
-    } else if (deliverErrors.includes(senderVerifiedAddress.deliverability)) {
-      yield put(verifySenderAddressFailure({
-        senderAddressError: deliverErrorsObj[senderVerifiedAddress.deliverability],
+        recipientAddressError: deliverErrorsObj[result.deliverability],
       }));
     } else {
       yield call(sendLetterSaga, {
         imageUrl,
-        recipientAddress,
+        recipientAddress: {
+          name: result.recipient,
+          address_line1: result.primary_line,
+          address_line2: result.secondary_line,
+          address_city: result.components.city,
+          address_state: result.components.state,
+          address_zip: result.components.zip_code,
+          address_country: 'US',
+        },
         senderAddress,
         message,
       });
     }
   } catch (error) {
     console.log(error);
+    yield put(verifyRecipientAddressFailure({
+      recipientAddressError: 'Error, something went wrong while verifying recipient address.',
+    }));
   }
 }
 
@@ -130,14 +144,15 @@ function* uploadImage({
       Bucket: s3Bucket,
       ContentType: 'image/jpeg',
       Key: imageKey,
-      Body: dataURItoBlob(base64Image),
+      Body: base64Image.split(',')[1], // dataURItoBlob(base64Image),
     };
     const request = new AwsRequest.Builder()
       .withService('s3')
       .withAction('PutObject')
       .withRegion('us-east-1')
       .withArgs(args);
-    yield call(s3Upload, { aws, request });
+    const result = yield call(s3Upload, { aws, request });
+    console.log('upload image result', result);
     yield call(verifyAddresses, {
       imageUrl: `https://s3.amazonaws.com/${s3Bucket}/${imageKey}`,
       recipientAddress,
