@@ -30,8 +30,12 @@ class LettersCompose extends React.Component {
                 {location.state.inmate.number}
               </Typography>
               <Typography variant="subtitle2" component="h3">{location.state.inmate.facility}</Typography>
-              <Typography variant="subtitle2" component="h3">{location.state.inmate.zip}</Typography>
-              <Typography variant="subtitle2" component="h3">{location.state.inmate.address}</Typography>
+              <Typography variant="subtitle2" component="h3">
+                {location.state.inmate.addressLine1}
+                ,&nbsp;
+                {location.state.inmate.pBox}
+              </Typography>
+              <Typography variant="subtitle2" component="h3">{location.state.inmate.addressLine2}</Typography>
             </div>
           )}
         </PapperBlock>
