@@ -3,10 +3,9 @@ import {
   call,
   fork,
   put,
-  select,
+  // select,
 } from 'redux-saga/effects';
 import { Stitch } from 'mongodb-stitch-browser-sdk';
-import { AwsServiceClient, AwsRequest } from 'mongodb-stitch-browser-services-aws';
 import uuidv4 from 'uuid/v4';
 
 import { SEND_LETTER } from '../actions/actionConstants';
@@ -17,22 +16,12 @@ import {
   sendLetterSuccess,
 } from '../actions/LettersActions';
 
-function getStitchClient(state) {
-  return state.getIn(['auth', 'stitchClient']);
-}
-
-// function dataURItoBlob(dataURI) {
-//   const binary = atob(dataURI.split(',')[1]);
-//   const array = [];
-//   for (let i = 0; i < binary.length; i += 1) {
-//     array.push(binary.charCodeAt(i));
-//   }
-
-//   return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
+// function getStitchClient(state) {
+//   return state.getIn(['auth', 'stitchClient']);
 // }
 
-function s3Upload({ aws, request }) {
-  return aws.execute(request.build());
+function s3Upload({ imageKey, base64Image }) {
+  return Stitch.defaultAppClient.callFunction('uploadImage', [imageKey, base64Image]);
 }
 
 function validateAddress({ recipientAddress }) {
@@ -71,6 +60,8 @@ function* sendLetterSaga({
       yield put(sendLetterFailure({
         sendLetterError: result.error.message,
       }));
+    } else {
+      alert(`Letter is accessible via ${result.url}`);
     }
     yield put(sendLetterSuccess());
   } catch (error) {
@@ -135,23 +126,9 @@ function* uploadImage({
   message,
 }) {
   try {
-    const client = yield select(getStitchClient);
-    const aws = client.getServiceClient(AwsServiceClient.factory, 'ameelio-aws');
-    const s3Bucket = 'ameelio-dev';
-    const imageKey = `${uuidv4()}.jpg`;
-    const args = {
-      ACL: 'public-read',
-      Bucket: s3Bucket,
-      ContentType: 'image/jpeg',
-      Key: imageKey,
-      Body: base64Image.split(',')[1], // dataURItoBlob(base64Image),
-    };
-    const request = new AwsRequest.Builder()
-      .withService('s3')
-      .withAction('PutObject')
-      .withRegion('us-east-1')
-      .withArgs(args);
-    const result = yield call(s3Upload, { aws, request });
+    const s3Bucket = 'skyhosting-ameelio-dev';
+    const imageKey = `letters/${uuidv4()}.jpg`;
+    const result = yield call(s3Upload, { imageKey, base64Image });
     console.log('upload image result', result);
     yield call(verifyAddresses, {
       imageUrl: `https://s3.amazonaws.com/${s3Bucket}/${imageKey}`,
