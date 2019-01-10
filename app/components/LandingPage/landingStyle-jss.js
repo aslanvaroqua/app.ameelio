@@ -1,6 +1,5 @@
 import { gradientBgLight, gradientBgDark } from 'containers/Templates/appStyles-jss';
 import { fade, darken } from '@material-ui/core/styles/colorManipulator';
-import controlScreen from 'dan-images/screen/control_screen.png';
 import line1 from 'dan-images/decoration/line1.png';
 import line2 from 'dan-images/decoration/line2.png';
 import petal1 from 'dan-images/decoration/petal1.png';
@@ -173,6 +172,24 @@ const styles = theme => ({
   solid: {},
   fit: {},
   out: {},
+  letterList: {
+    display: 'flex',
+    textAlign: 'center',
+    flexDirection: 'row'
+  },
+  List: {
+    marginTop: 60,
+    '& span': {
+      '& svg': {
+        fill: theme.palette.common.white,
+        width: 60,
+        height: 60
+      }
+    },
+    '& h6': {
+      color: theme.palette.common.white
+    }
+  },
   banner: {
     zIndex: 1,
     position: 'relative',
@@ -182,8 +199,16 @@ const styles = theme => ({
     [theme.breakpoints.down('md')]: {
       top: theme.spacing.unit * 7,
     },
+    '& .store': {
+      '& svg': {
+        margin: '20px 0',
+        fill: theme.palette.common.white,
+        width: 40,
+        height: 40
+      }
+    },
     [theme.breakpoints.down('sm')]: {
-      height: 580,
+      height: 2650,
       '& h2': {
         fontSize: theme.spacing.unit * 5,
       },
@@ -193,7 +218,7 @@ const styles = theme => ({
     },
     '&$fit': {
       [theme.breakpoints.up('md')]: {
-        height: 760,
+        height: 1660,
         paddingTop: theme.spacing.unit * 20,
       },
       top: 0,
@@ -252,7 +277,7 @@ const styles = theme => ({
   },
   bannerParallaxWrap: {
     '& figure > div': {
-      height: 800,
+      height: 2650,
       width: '100%',
       position: 'absolute',
       top: 0,
@@ -261,9 +286,9 @@ const styles = theme => ({
   previewApp: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     zIndex: 1,
-    padding: `0 ${theme.spacing.unit}px`
+    padding: `30px ${theme.spacing.unit}px`
   },
   bottom: {},
   m1: {
@@ -287,24 +312,12 @@ const styles = theme => ({
   },
   screen: {
     [theme.breakpoints.up('sm')]: {
-      width: 600,
-      height: 310,
     },
-    overflow: 'hidden',
-    boxShadow: theme.shadows[2],
-    borderRadius: theme.rounded.medium,
-    background: fade(theme.palette.background.paper, 0.9),
-    padding: theme.spacing.unit,
-    paddingTop: theme.spacing.unit * 3,
-    borderBottom: `${theme.spacing.unit}px solid ${fade(theme.palette.background.paper, 0.9)}`,
-    '&:before': {
-      content: '""',
-      position: 'absolute',
-      background: `url(${controlScreen}) transparent no-repeat`,
-      top: 6,
-      right: 8,
-      width: 54,
-      height: 20
+    '&:first-child': {
+      transform: 'scale(0.8)'
+    },
+    '&:last-child': {
+      transform: 'scale(0.8)'
     },
     '& img': {
       width: '100%',
@@ -338,6 +351,124 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
     opacity: 0.05,
   },
+  lettersBtn: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '36px 0'
+  },
+  lettersImg: {
+    position: 'relative',
+    display: 'flex',
+    'justify-content': 'flex-end',
+    '& img': {
+      padding: 10,
+      width: '70%'
+    },
+    '& .center': {
+      position: 'absolute',
+      top: '50%',
+      left: 0,
+      transform: 'translateY(-50%)',
+      background: 'gray',
+      height: '50%',
+      width: '50%'
+    }
+  },
+  connectImg: {
+    position: 'relative',
+    display: 'flex',
+    'justify-content': 'flex-start',
+    '& img': {
+      padding: 10,
+      width: '70%'
+    },
+    '& .center': {
+      position: 'absolute',
+      top: '50%',
+      right: 0,
+      transform: 'translateY(-30%)',
+      background: 'gray',
+      height: '50%',
+      width: '50%'
+    }
+  },
+  connectListsIcon: {
+    '& nav': {
+      '& li': {
+        border: 0,
+        '& svg': {
+          fill: theme.palette.secondary.main,
+          width: 30,
+          height: 30
+        }
+      },
+      '& hr': {
+        display: 'none'
+      }
+    }
+  },
+  connectLists: {
+    '& nav': {
+      display: 'flex',
+      flexDirection: 'row',
+      border: '1px solid gray',
+      borderRadius: '10px',
+      padding: '16px 0',
+      margin: '36px 0',
+      '& li': {
+        padding: 0,
+        border: 0,
+        textAlign: 'center',
+        '&:hover': {
+          background: 'transparent'
+        }
+      }
+    }
+  },
+  forumImg: {
+    '& img': {
+      width: '100%',
+      hright: '100%'
+    },
+  },
+  trendsImg: {
+    '& img': {
+      width: '100%',
+      paddingLeft: 8,
+      [theme.breakpoints.down('sm')]: {
+        paddingLeft: 0
+      }
+    }
+  },
+  trendsBtn: {
+    textAlign: 'left',
+    marginBottom: 36
+  },
+  trendsLists: {
+    '& nav': {
+      display: 'flex',
+      flexDirection: 'row',
+      margin: '36px 0',
+      [theme.breakpoints.down('sm')]: {
+        flexDirection: 'column',
+        '& hr': {
+          display: 'none'
+        }
+      },
+      '& li': {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 0,
+        textAlign: 'center'
+      },
+      '& svg': {
+        width: 50,
+        height: 50,
+        fill: theme.palette.secondary.main,
+        marginBottom: '16px'
+      }
+    }
+  },
   feature: {
     marginTop: sectionSpace,
     [theme.breakpoints.down('sm')]: {
@@ -350,6 +481,7 @@ const styles = theme => ({
     },
     '& p': {
       fontSize: 18,
+      paddingBottom: 24
     },
     '& h4': {
       marginBottom: theme.spacing.unit * 3,
@@ -388,6 +520,7 @@ const styles = theme => ({
   },
   pricing: {
     position: 'relative',
+    display: 'none',
     marginTop: sectionSpace,
     [theme.breakpoints.down('sm')]: {
       marginTop: sectionSpaceMobile,
@@ -402,7 +535,7 @@ const styles = theme => ({
     position: 'absolute',
     overflow: 'hidden',
     width: '100%',
-    height: '230%',
+    // height: '230%',
     top: 0,
     zIndex: 0,
     [theme.breakpoints.down('md')]: {
@@ -668,6 +801,7 @@ const styles = theme => ({
   withBg: {},
   contact: {
     paddingTop: sectionSpace,
+    display: 'none',
     [theme.breakpoints.down('sm')]: {
       paddingTop: sectionSpaceMobile,
     },
@@ -707,15 +841,24 @@ const styles = theme => ({
       }
     }
   },
+  emptyBox: {
+    height: 40,
+    width: '100%',
+    backgroundColor: '#a4d0ea'
+  },
   footer: {
     background: theme.palette.type === 'dark' ? gradientBgDark(theme) : gradientBgLight(theme),
-    paddingTop: theme.spacing.unit * 10,
-    position: 'absolute',
-    bottom: -300,
-    height: 330,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     width: '100%',
     '& $brand': {
       color: theme.palette.text.primary
+    },
+    '& h4': {
+      color: theme.palette.common.white,
+      padding: '16px 0',
+      fontSize: '16px'
     },
     '& nav': {
       '& li': {
@@ -724,20 +867,62 @@ const styles = theme => ({
         '& a': {
           fontSize: 11,
           textTransform: 'capitalize',
-          fontWeight: theme.typography.fontWeightRegular
+          fontWeight: theme.typography.fontWeightRegular,
         }
       }
     },
     '& $spaceContainer': {
+      textAlign: 'center',
+      '& .footerBtn': {
+        color: theme.palette.common.white
+      },
       [theme.breakpoints.down('sm')]: {
         flexDirection: 'column',
         '& ul': {
           textAlign: 'center',
-          marginTop: theme.spacing.unit * 3
+          marginTop: theme.spacing.unit * 3,
         }
       }
     },
     '& $container': {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      '& .footerIcons': {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        '& p': {
+          color: theme.palette.common.white,
+          fontSize: '14px',
+          paddingBottom: 24
+        },
+        '& nav': {
+          display: 'flex',
+          height: 70,
+          '& li': {
+            display: 'flex',
+            [theme.breakpoints.down('sm')]: {
+              width: 170
+            },
+            '& span': {
+              color: theme.palette.common.white,
+              fontSize: 14,
+              width: 'auto',
+              height: 'auto',
+              '& svg': {
+                width: 40,
+                height: 40,
+              }
+            }
+          }
+        }
+      },
+      '& $footerIcons': {
+        color: 'red'
+      },
       [theme.breakpoints.down('sm')]: {
         flexDirection: 'column',
         alignItems: 'center',

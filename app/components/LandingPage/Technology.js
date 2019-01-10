@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import reactLogo from 'dan-images/logo/react.png';
-import reduxLogo from 'dan-images/logo/redux.png';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
-import muiLogo from 'dan-images/logo/mui.png';
-import routerLogo from 'dan-images/logo/react_router.png';
-import webpackLogo from 'dan-images/logo/webpack.png';
-import jssLogo from 'dan-images/logo/jss.png';
 import Title from './Title';
 import styles from './landingStyle-jss';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import Ionicon from 'react-ionicons';
 
 function ParallaxDeco(props) {
   const { classes } = props;
@@ -69,60 +67,71 @@ const ParallaxDecoStyled = withStyles(styles)(ParallaxDeco);
 class Technology extends React.Component {
   render() {
     const { classes, slideMode } = this.props;
+    const descript = 'Trends is an analytics tool that that evaluates criminal justice data. We employ machine learning algorithms to analyze prison population records from federal and state correctional databases. Additionally, we offer download links to raw datasets in order to allow others a chance to conduct studies and innovate with us.';
     return (
       <div className={classes.tech}>
         {!slideMode && (<ParallaxDecoStyled />)}
         <div className={slideMode ? classes.fullWidth : classes.container}>
-          <Title title="The technologies" desc="Cras convallis lacus orci, tristique tincidunt magna consequat in." align="center" monocolor={slideMode && true} />
+          <Title title="Trends" align="left" monocolor={slideMode && true} />
           <Grid container className={classes.root} spacing={24}>
-            <Grid item sm={4} xs={12}>
-              <div className={classNames(classes.wool, slideMode && classes.slideMode)}>
-                <figure>
-                  <img src={reactLogo} alt="react" />
-                </figure>
-                <Typography variant="h5" className={classes.react}>React.js</Typography>
-              </div>
-              <div className={classNames(classes.wool, slideMode && classes.slideMode)}>
-                <figure>
-                  <img src={routerLogo} alt="react router" />
-                </figure>
-                <Typography variant="h5" className={classes.router}>React Router</Typography>
-              </div>
-            </Grid>
-            <Grid item sm={4} xs={12}>
-              <div className={classes.centerTech}>
-                <div className={classNames(classes.wool, slideMode && classes.slideMode)}>
-                  <figure>
-                    <img src={reduxLogo} alt="redux" />
-                  </figure>
-                  <Typography variant="h5" className={classes.redux}>Redux.js</Typography>
+            <Grid item sm={6} xs={12}>
+              <Typography>
+                {descript}
+              </Typography>
+              <Fragment>
+                <div className={classes.trendsLists}>
+                  <List component="nav">
+                    <ListItem>
+                      <span className={classes.icon}>
+                        <Ionicon icon='ios-infinite-outline' />
+                      </span>
+                      <ListItemText primary="Beautiful Visuals" />
+                    </ListItem>
+                    <Divider />
+                    <ListItem>
+                      <span className={classes.icon}>
+                        <Ionicon icon='ios-ionic-outline' />
+                      </span>
+                      <ListItemText primary="Real-time updates" />
+                    </ListItem>
+                    <ListItem>
+                      <span className={classes.icon}>
+                        <Ionicon icon='ios-infinite-outline' />
+                      </span>
+                      <ListItemText primary="Predictive Analysis" />
+                    </ListItem>
+                    <ListItem>
+                      <span className={classes.icon}>
+                        <Ionicon icon='ios-ionic-outline' />
+                      </span>
+                      <ListItemText primary="Download Feature" />
+                    </ListItem>
+                    <Divider />
+                  </List>
                 </div>
-                <Hidden smDown>
-                  <Button variant="contained" size="large" color="secondary">Request To Implement Technology</Button>
-                </Hidden>
-                <div className={classNames(classes.wool, slideMode && classes.slideMode)}>
-                  <figure>
-                    <img src={webpackLogo} alt="webpack" />
-                  </figure>
-                  <Typography variant="h5" className={classes.webpack}>Webpack</Typography>
-                </div>
-              </div>
+              </Fragment>
             </Grid>
-            <Grid item sm={4} xs={12}>
-              <div className={classNames(classes.wool, slideMode && classes.slideMode)}>
-                <figure>
-                  <img src={muiLogo} alt="mui" />
-                </figure>
-                <Typography variant="h5" className={classes.mui}>Material UI</Typography>
-              </div>
-              <div className={classNames(classes.wool, slideMode && classes.slideMode)}>
-                <figure>
-                  <img src={jssLogo} alt="jss" />
-                </figure>
-                <Typography variant="h5" className={classes.jss}>CSS in JS</Typography>
+            <Grid item sm={6} xs={12}>
+              <div className={classNames(classes.trendsImg)}>
+                <img className="center" src="/images/screen/image-one.jpg" alt="" />
               </div>
             </Grid>
           </Grid>
+          <div className={classes.forumImg}>
+            <Grid container className={classes.root} spacing={40}>
+              <Grid item xs={12} md={6}>
+                <img src="/images/screen/image-one.jpg" alt="" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <img src="/images/screen/image-one.jpg" alt="" />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <div className={classes.trendsBtn}>
+                  <Button size="large" align="left" variant="outlined" color="primary">Explore data</Button>
+                </div>
+              </Grid>
+            </Grid>  
+          </div>
         </div>
       </div>
     );

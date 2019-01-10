@@ -7,6 +7,9 @@ import Grid from '@material-ui/core/Grid';
 import Ionicon from 'react-ionicons';
 import Title from './Title';
 import styles from './landingStyle-jss';
+import Accordion from './Accordion';
+import Button from '@material-ui/core/Button';
+
 
 let counter = 0;
 function createFeatureData(icon, title, desc) {
@@ -22,9 +25,10 @@ function createFeatureData(icon, title, desc) {
 class Feature extends React.Component {
   state = {
     featureList: [
-      createFeatureData('ios-infinite-outline', 'Letters', 'Sending letters and photos to an inmate in the USA just got easier. Our service is the fast, free way of getting your messages and photos delivered to incarcerated loved ones.'),
-      createFeatureData('ios-ionic-outline', 'Forum', 'Real time e-messaging with video chat coming soon and a forum for connecting with a network of families, friends, and advocates.'),
-      createFeatureData('ios-infinite-outline', 'Trends', 'View, explore, and export data from the justice system and see predictions made through machine-learning algorithms.')
+      createFeatureData('ios-infinite-outline', 'Fast Shipping', 'We print and mail letters by the next day.'),
+      createFeatureData('ios-ionic-outline', 'Free', 'We provide 1 year free membership. After that, users are charged $3 a month.'),
+      createFeatureData('ios-infinite-outline', 'Privacy', 'We use top of line encryption to keep your mesages private.'),
+      createFeatureData('ios-ionic-outline', 'Make an impact', 'All of our proceeds are invested back into the nonprofit.')
     ]
   }
 
@@ -34,22 +38,44 @@ class Feature extends React.Component {
     return (
       <div className={classNames(classes.feature, slideMode ? classes.mono : classes.color)}>
         <div className={!slideMode ? classes.container : ''}>
-          <Title title="Main Feature" align="center" monocolor={slideMode && true} />
-          <Grid container className={classes.root} spacing={40}>
-            { featureList.map(item => (
-              <Grid key={item.id.toString()} item xs={12} md={4}>
-                <Typography component="h4" variant="h6">
-                  <span className={classes.icon}>
-                    <Ionicon icon={item.icon} />
-                  </span>
-                  {item.title}
-                </Typography>
-                <Typography className={slideMode ? classes.colorWhite : ''}>
-                  {item.desc}
-                </Typography>
-              </Grid>
-            )) }
+          <Grid container spacing={40}>
+            <Grid item xs={12} md={5}>
+              <Title title="Letters" align="left" monocolor={slideMode && true} />
+              <Typography component="p" variant="p">
+                Stay in touch with any inmate using our Letters feature. Compose a message and attach a photo, just like an email or text.
+              </Typography>
+              <img src="/images/screen/sample-letter.jpg" alt="" />
+              <Accordion />
+            </Grid>
+            <Grid item xs={12} md={7}>
+              <div className={classNames(classes.lettersImg)}>
+                <img className="center" src="/images/screen/image.jpg" alt="" />
+                <img src="/images/screen/image.jpg" alt="" />
+              </div>
+              <div className={classNames(classes.lettersBtn)}>
+                <Button size="large" align="center" variant="outlined" color="primary">Send letter</Button>
+              </div>
+            </Grid>
           </Grid>
+          <div>
+            <Grid container className={classNames(classes.letterList)} spacing={40}>
+              { featureList.map(item => (
+                <Grid key={item.id.toString()} item xs={12} md={3}>
+                  <Typography component="h4" variant="h4">
+                    <span className={classes.icon}>
+                      <Ionicon icon={item.icon} />
+                    </span>
+                  </Typography>
+                  <Typography component="h6" variant="h6">
+                    {item.title}
+                  </Typography>
+                  <Typography className={slideMode ? classes.colorWhite : ''}>
+                    {item.desc}
+                  </Typography>
+                </Grid>
+              )) }
+            </Grid>
+          </div>
         </div>
       </div>
     );

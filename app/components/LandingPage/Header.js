@@ -32,15 +32,13 @@ class Header extends React.Component {
   state = {
     open: false,
     menuList: [
-      createData('feature', '#feature'),
-      createData('showcase', '#showcase'),
-      createData('testimonials', '#testimonials'),
-      createData('technology', '#tech'),
-      createData('pricing', '#pricing'),
-      createData('contact', '#contact'),
+      createData('Letters', '#feature'),
+      createData('Connect', '#showcase'),
+      createData('Forum', '#testimonials'),
+      createData('Trends', '#tech'),
+      createData('About', '#pricing'),
     ]
   }
-
   toggleDrawerOpen = () => {
     this.setState({ open: true });
   }

@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { withStyles } from '@material-ui/core/styles';
-import link from 'dan-api/ui/link';
 import styles from './landingStyle-jss';
+import Grid from '@material-ui/core/Grid';
+import RegisterForm from '../Forms/RegisterForm';
+import Ionicon from 'react-ionicons';
+
+
 
 function ParallaxDeco(props) {
   const { classes } = props;
@@ -59,9 +61,31 @@ ParallaxDeco.propTypes = {
 
 const ParallaxDecoStyled = withStyles(styles)(ParallaxDeco);
 
+let counter = 0;
+function bannerFeatureData(icon, title, desc) {
+  counter += 1;
+  return {
+    id: counter,
+    icon,
+    title,
+    desc
+  };
+}
+
 class Banner extends React.Component {
+  state = {
+    bannerList: [
+      bannerFeatureData('ios-infinite-outline', 'Letters', 'Send letters and photos to any inmate in the U.S. prison system.'),
+      bannerFeatureData('ios-ionic-outline', 'Connect', 'Send real-time e-messages and video chat from any device. (Coming soon)'),
+      bannerFeatureData('ios-ionic-outline', 'Forum', 'Build a social profile, and start connecting with a network of families, friends, and advocates.'),
+      bannerFeatureData('ios-infinite-outline', 'Trends', 'Explore data and machine learning predictions on the justice system.')
+    ]
+  }
+
   render() {
     const { classes, gradient, slideMode } = this.props;
+    const { bannerList } = this.state;
+
     return (
       <div
         className={
@@ -74,49 +98,68 @@ class Banner extends React.Component {
       >
         {!slideMode && <ParallaxDecoStyled />}
         <div className={!slideMode ? classes.container : ''}>
-          <Typography component="h2" variant="h2" gutterBottom>Ameelio</Typography>
-          <Typography component="p" variant="h5" gutterBottom> The Free Communication Platform for Inmates and their Families </Typography>
-          <div className={classes.btnArea}>
-            <Button
-              size="large"
-              variant="outlined"
-              className={classNames(classes.button, classes.btnLight)}
-              component={Link}
-              to={link.login}
-            >
-              Login
-            </Button>
-            <Button
-              size="large"
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              component={Link}
-              to={link.dashboard}
-            >
-              dashboard
-            </Button>
-          </div>
+          <Grid container spacing={40}>
+            <Grid item xs={12} md={7}>
+              <Typography align='left' component="h2" variant="h2" gutterBottom>Free and open source prison communication, social network, and data platform.</Typography>
+              <Typography className={classes.colorWhite} align='left' component="h6" variant="h6" gutterBottom>Send letters. Chat. Collaborate. Explore Data.</Typography>
+              <Typography align='left' component="p" variant="p" gutterBottom>Ameelio is a nonprofit technology company. We build tools to serve inmates and their loved ones. Our services make it easy and fun to stay in touch with inmates, connect with a nework of families and advocates, and explore data on the justice sytem. Unlike costly and inpersonal prison services, our platform strives to be completely free and accesible to all users. We are committed to creating a future where every inmate is connected.</Typography>
+            </Grid>
+            <Grid item xs={12} md={5}>
+              <RegisterForm />
+              <Grid container spacing={0}>
+                <Grid item xs={12} md={6}>
+                  <span className='store'>
+                    <Ionicon icon='ios-appstore' />
+                  </span>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <span className='store'>
+                    <Ionicon icon='md-appstore' />
+                  </span>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
           <div className={classes.previewApp}>
             <Hidden smDown>
-              <div className={classNames(classes.m2, classes.screen, slideMode ? classes.bottom : '')}>
-                <img src="/images/screen/crypto.jpg" alt="crm dashboard" />
+              <div className={classNames(classes.screen)}>
+                <img src="/images/screen/ipad.png" alt="crm dashboard" />
               </div>
             </Hidden>
-            <div className={classNames(classes.m1, classes.screen)}>
-              <img src="/images/screen/personal.jpg" alt="personal dashboard" />
+            <div className={classNames(classes.screen)}>
+              <img src="/images/screen/mac.png" alt="personal dashboard" />
             </div>
             <Hidden smDown>
-              <div className={classNames(classes.m3, classes.screen, slideMode ? classes.bottom : '')}>
-                <img src="/images/screen/crm.jpg" alt="crypto dashboard" />
+              <div className={classNames(classes.screen)}>
+                <img src="/images/screen/iphone.png" alt="crypto dashboard" />
               </div>
-            </Hidden>
+            </Hidden>   
           </div>
-        </div>
+          <div className={classNames(classes.List)}>
+            <Grid container className={classes.root} spacing={40}>
+              { bannerList.map(item => (
+                <Grid key={item.id.toString()} item xs={12} md={3}>
+                  <Typography component="h4" variant="h4">
+                    <span className={classes.banner.icon}>
+                      <Ionicon icon={item.icon} />
+                    </span>
+                  </Typography>
+                  <Typography component="h6" variant="h6">
+                    {item.title}
+                  </Typography>
+                  <Typography className={slideMode ? classes.colorWhite : ''}>
+                    {item.desc}
+                  </Typography>
+                </Grid>
+              )) }
+            </Grid>
+          </div>
+        </div>  
       </div>
     );
   }
 }
+
 
 Banner.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -130,7 +173,7 @@ Banner.defaultProps = {
 
 const reducer = 'ui';
 const mapStateToProps = state => ({
-  gradient: state.getIn([reducer, 'gradient']),
+  gradient: state.getIn([reducer, 'gradient']), 
 });
 
 const BannerMaped = connect(

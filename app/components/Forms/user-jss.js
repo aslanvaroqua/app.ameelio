@@ -116,10 +116,10 @@ const styles = theme => ({
   },
   formWrap: {
     [theme.breakpoints.up('sm')]: {
-      padding: '0 100px'
+      // padding: '0 100px'
     },
     [theme.breakpoints.up('md')]: {
-      padding: '0 150px'
+      // padding: '0 150px'
     },
   },
   pageFormWrap: {
@@ -179,6 +179,7 @@ const styles = theme => ({
   },
   title: {
     color: theme.palette.primary.main,
+    textTransform: 'uppercase',
   },
   subtitle: {
     fontSize: 14

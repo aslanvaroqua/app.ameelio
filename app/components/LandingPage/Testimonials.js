@@ -1,35 +1,17 @@
-import React from 'react';
+
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
-import Type from 'dan-styles/Typography.scss';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import Slider from 'react-animated-slider';
-import imgApi from 'dan-api/images/photos';
 import 'dan-styles/vendors/react-animated-slider/react-animated-slider.css';
 import Title from './Title';
 import styles from './landingStyle-jss';
+import Grid from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 
-const content = [
-  {
-    title: 'Vulputate Mollis Ultricies',
-    image: imgApi[11],
-    user: 'Luanda Gjokaj',
-  },
-  {
-    title: 'Tortor Dapibus Commodo',
-    image: imgApi[14],
-    user: 'Erich Behrens',
-  },
-  {
-    title: 'Phasellus volutpat metus',
-    image: imgApi[15],
-    user: 'Bruno Vizovskyy',
-  }
-];
+
 
 function ParallaxDeco(props) {
   const { classes } = props;
@@ -88,25 +70,28 @@ class Testimonials extends React.Component {
       <div className={classes.testimonials}>
         {!slideMode && (<ParallaxDecoStyled />)}
         <div className={!slideMode ? classes.container : classes.fullSliderContent}>
-          <Title title="What people said" align="center" monocolor={slideMode && true} />
-          <div className={classes.sliderWrap}>
-            <Slider className="slider-wrapper">
-              {content.map((item, index) => (
-                <div
-                  key={index.toString()}
-                  className="slider-content"
-                  style={{ background: `url('${item.image}') no-repeat center center` }}
-                >
-                  <IconButton aria-label="Play/pause" className={classes.playIcon}>
-                    <PlayArrowIcon />
-                  </IconButton>
-                  <p className={classNames(classes.videoCaption, slideMode ? classes.mono : classes.color)}>
-                    <Typography variant="h6" component="span" className={Type.light} gutterBottom>{item.title}</Typography>
-                    <Typography component="span">{item.user}</Typography>
-                  </p>
+          <Title title="Forum" align="center" monocolor={slideMode && true} />
+          <Grid container className={classes.root} spacing={40} justify="center" direction="row">
+            <Grid item xs={12} md={4}>
+              <Typography component="p" variant="p">
+                Welcome to a new social network built with real purpose. Connect with other family & friends, advocates, attorneys, among others. Post, chat, collaborate.
+              </Typography>
+            </Grid>
+          </Grid>
+          <div className={classes.forumImg}>
+            <Grid container className={classes.root} spacing={40}>
+              <Grid item xs={12} md={6}>
+                <img src="/images/screen/image-one.jpg" alt="" />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <img src="/images/screen/image-one.jpg" alt="" />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <div>
+                  <Button size="large" align="center" variant="outlined" color="primary">Create account</Button>
                 </div>
-              ))}
-            </Slider>
+              </Grid>
+            </Grid>  
           </div>
         </div>
       </div>
@@ -115,12 +100,8 @@ class Testimonials extends React.Component {
 }
 
 Testimonials.propTypes = {
-  classes: PropTypes.object.isRequired,
-  slideMode: PropTypes.bool,
+  classes: PropTypes.object.isRequired
 };
 
-Testimonials.defaultProps = {
-  slideMode: false
-};
 
 export default withStyles(styles)(Testimonials);
