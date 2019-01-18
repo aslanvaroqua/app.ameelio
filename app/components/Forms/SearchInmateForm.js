@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import List from '@material-ui/core/List';
 
 import InmateCard from '../CardPaper/InmateCard';
 import { inmatesMockList } from '../../containers/Pages/Letters/dummyData';
@@ -26,6 +27,11 @@ const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit * 3,
+  },
+  list: {
+    width: '100%',
+    // maxWidth: 500,
+    backgroundColor: theme.palette.background.paper,
   },
 });
 
@@ -138,19 +144,11 @@ class SearchInmateForm extends PureComponent {
           </Grid>
         )}
         {inmatesList.length > 0 && (
-          <Grid container alignItems="center" spacing={40} style={{ marginTop: 40, marginBottom: 20 }}>
-            {inmatesList.map((inmate) => (
-              <Grid item xs={12} sm={6} md={4} key={inmate.id}>
-                <InmateCard inmateInfo={inmate} onClickMail={this.onClickMail}>
-                  <Typography variant="h6" component="h3">
-                    {inmate.name.toUpperCase()}
-                    ,
-                    {inmate.number}
-                  </Typography>
-                </InmateCard>
-              </Grid>
+          <List className={classes.list} style={{ marginTop: 40 }}>
+            {inmatesList.map(inmate => (
+              <InmateCard key={inmate.id} inmateInfo={inmate} onClickMail={this.onClickMail} />
             ))}
-          </Grid>
+          </List>
         )}
       </Fragment>
     );

@@ -7,6 +7,11 @@ import roundedThumbLight from 'dan-images/decoration/roundedThumbLight.png';
 import roundedThumbDark from 'dan-images/decoration/roundedThumbDark.png';
 
 const styles = theme => ({
+  inmateAvatar: {
+    margin: 10,
+    color: '#fff',
+    backgroundColor: blue[500],
+  },
   divider: {
     margin: `${theme.spacing.unit * 3}px 0`
   },
