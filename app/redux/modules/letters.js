@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 
 import {
+  UPDATE_LETTER_INFO,
   UPLOAD_IMAGE_FAILURE,
   VERIFY_RECIPIENT_ADDRESS_FAILURE,
   SEND_LETTER,
@@ -13,11 +14,21 @@ const initialState = {
   imageUploadError: '',
   recipientAddressError: '',
   sendLetterError: '',
+  letterInfo: {
+    inmate: null,
+    message: '',
+    imageBase64: '',
+  },
 };
 const initialImmutableState = fromJS(initialState);
 
 export default function reducer(state = initialImmutableState, action = {}) {
   switch (action.type) {
+    case UPDATE_LETTER_INFO:
+      return state.withMutations((mutableState) => {
+        const { payload: { key, info } } = action;
+        mutableState.setIn(['letterInfo', key], info);
+      });
     case SEND_LETTER:
       return state.withMutations((mutableState) => {
         mutableState.set('loading', true);

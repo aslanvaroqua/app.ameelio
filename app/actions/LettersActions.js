@@ -1,5 +1,10 @@
 import * as types from './actionConstants';
 
+export const updateLetterInfo = (key, info) => ({
+  type: types.UPDATE_LETTER_INFO,
+  payload: { key, info },
+});
+
 // Init send letter process
 export const sendLetter = (base64Image, recipientAddress, senderAddress, message) => ({
   type: types.SEND_LETTER,

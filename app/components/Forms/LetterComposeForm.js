@@ -5,7 +5,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
+import { updateLetterInfo } from '../../actions/LettersActions';
 import UploadInputImg from './UploadInputImg';
 
 const getBase64 = (file) => (
@@ -50,7 +53,7 @@ class LetterComposeForm extends PureComponent {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { history, inmate } = this.props;
+    const { updateLetterInfo: updateLetterInfoAction } = this.props;
     const { message, images } = this.state;
     if (message.length === 0) {
       this.setState({ error: true });
@@ -61,15 +64,9 @@ class LetterComposeForm extends PureComponent {
       try {
         const imagesPromises = images.map(image => getBase64(image));
         const imagesBase64 = await Promise.all(imagesPromises);
-        console.log(imagesBase64);
-        history.push({
-          pathname: '/app/letters/review',
-          state: {
-            inmate,
-            message,
-            images: imagesBase64,
-          }
-        });
+
+        updateLetterInfoAction('message', message);
+        updateLetterInfoAction('imageBase64', imagesBase64[0]);
       } catch (error) {
         console.log(error);
       }
@@ -125,8 +122,10 @@ class LetterComposeForm extends PureComponent {
 
 LetterComposeForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
-  inmate: PropTypes.object.isRequired,
+  updateLetterInfo: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(LetterComposeForm);
+export default compose(
+  connect(null, { updateLetterInfo }),
+  withStyles(styles)
+)(LetterComposeForm);

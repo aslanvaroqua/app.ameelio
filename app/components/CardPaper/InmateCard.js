@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import Typography from '@material-ui/core/Typography';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Avatar from '@material-ui/core/Avatar';
 
 import styles from './cardStyle-jss';
 import Popover from '../PopoverTooltip/InmatePopover';
@@ -15,16 +16,18 @@ class InmateCard extends React.Component {
   render() {
     const {
       classes,
-      children,
       inmateInfo,
       onClickMail,
     } = this.props;
+    const [firstName, lastName] = inmateInfo.name.split(' ');
     return (
-      <Card className={classes.card}>
-        <CardContent>
-          {children}
-        </CardContent>
-        <CardActions className={classes.actions} disableActionSpacing>
+      <ListItem divider>
+        <Avatar className={classes.inmateAvatar}>
+          {firstName.slice(0, 1)}
+          {lastName.slice(0, 1)}
+        </Avatar>
+        <ListItemText primary={inmateInfo.name} />
+        <ListItemIcon>
           <Popover>
             <Typography variant="h6" component="h3">
               {inmateInfo.name.toUpperCase()}
@@ -39,18 +42,19 @@ class InmateCard extends React.Component {
             </Typography>
             <Typography variant="subtitle2" component="h3">{inmateInfo.addressLine2}</Typography>
           </Popover>
-          <IconButton aria-label="Contact mail" className={classes.button} onClick={() => onClickMail(inmateInfo)}>
-            <ContactMailIcon className={classes.contactMail} />
+        </ListItemIcon>
+        <ListItemIcon>
+          <IconButton aria-label="Contact details" className={classes.button} onClick={() => onClickMail(inmateInfo)}>
+            <ContactMailIcon className={classes.contact} />
           </IconButton>
-        </CardActions>
-      </Card>
+        </ListItemIcon>
+      </ListItem>
     );
   }
 }
 
 InmateCard.propTypes = {
   classes: PropTypes.object.isRequired,
-  children: PropTypes.node.isRequired,
   inmateInfo: PropTypes.object.isRequired,
   onClickMail: PropTypes.func.isRequired,
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
-import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import ContactIcon from '@material-ui/icons/AccountBox';
 import blue from '@material-ui/core/colors/blue';
@@ -45,36 +44,26 @@ class SimplePopover extends React.Component {
     const { anchorEl } = this.state;
     return (
       <div>
-        <Grid
-          container
-          alignItems="center"
-          justify="center"
-          direction="row"
-          spacing={16}
+        <IconButton aria-label="Contact details" className={classes.button} onClick={this.handleClick}>
+          <ContactIcon className={classes.contact} />
+        </IconButton>
+        <Popover
+          open={Boolean(anchorEl)}
+          anchorEl={anchorEl}
+          onClose={this.handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
         >
-          <Grid item md={6}>
-            <IconButton aria-label="Contact details" className={classes.button} onClick={this.handleClick}>
-              <ContactIcon className={classes.contact} />
-            </IconButton>
-            <Popover
-              open={Boolean(anchorEl)}
-              anchorEl={anchorEl}
-              onClose={this.handleClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-            >
-              <div style={{ margin: 15 }}>
-                {children}
-              </div>
-            </Popover>
-          </Grid>
-        </Grid>
+          <div style={{ margin: 15 }}>
+            {children}
+          </div>
+        </Popover>
       </div>
     );
   }
