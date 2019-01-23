@@ -7,7 +7,10 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import List from '@material-ui/core/List';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
+import { updateLetterInfo } from '../../actions/LettersActions';
 import InmateCard from '../CardPaper/InmateCard';
 import { inmatesMockList } from '../../containers/Pages/Letters/dummyData';
 
@@ -59,11 +62,9 @@ class SearchInmateForm extends PureComponent {
   };
 
   onClickMail = (inmate) => {
-    const { history } = this.props;
-    history.push({
-      pathname: '/app/letters/compose',
-      state: { inmate },
-    });
+    const { history, updateLetterInfo: updateLetterInfoAction } = this.props;
+    updateLetterInfoAction('inmate', inmate);
+    history.push('/app/letters/compose');
   };
 
   render() {
@@ -158,6 +159,10 @@ class SearchInmateForm extends PureComponent {
 SearchInmateForm.propTypes = {
   classes: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  updateLetterInfo: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(SearchInmateForm);
+export default compose(
+  connect(null, { updateLetterInfo }),
+  withStyles(styles)
+)(SearchInmateForm);

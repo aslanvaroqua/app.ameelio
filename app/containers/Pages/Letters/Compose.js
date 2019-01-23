@@ -4,12 +4,13 @@ import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import { PapperBlock, LetterComposeForm } from 'dan-components';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
 
 class LettersCompose extends React.Component {
   render() {
     const title = brand.name + ' - Compose';
     const description = brand.desc;
-    const { location, history } = this.props;
+    const { inmate, history } = this.props;
     return (
       <div>
         <Helmet>
@@ -22,25 +23,25 @@ class LettersCompose extends React.Component {
         </Helmet>
         <PapperBlock title="COMPOSE" desc="" icon="ios-create-outline" />
         <PapperBlock title="Recipient" desc="" icon="">
-          {location.state && location.state.inmate && (
+          {inmate && inmate.name && (
             <div>
               <Typography variant="h6" component="h3">
-                {location.state.inmate.name.toUpperCase()}
+                {inmate.name.toUpperCase()}
                 ,
-                {location.state.inmate.number}
+                {inmate.number}
               </Typography>
-              <Typography variant="subtitle2" component="h3">{location.state.inmate.facility}</Typography>
+              <Typography variant="subtitle2" component="h3">{inmate.facility}</Typography>
               <Typography variant="subtitle2" component="h3">
-                {location.state.inmate.addressLine1}
+                {inmate.addressLine1}
                 ,&nbsp;
-                {location.state.inmate.pBox}
+                {inmate.pBox}
               </Typography>
-              <Typography variant="subtitle2" component="h3">{location.state.inmate.addressLine2}</Typography>
+              <Typography variant="subtitle2" component="h3">{inmate.addressLine2}</Typography>
             </div>
           )}
         </PapperBlock>
         <PapperBlock title="Write message" desc="" icon="">
-          <LetterComposeForm history={history} inmate={location.state ? location.state.inmate : {}} />
+          <LetterComposeForm history={history} />
         </PapperBlock>
       </div>
     );
@@ -49,6 +50,14 @@ class LettersCompose extends React.Component {
 
 LettersCompose.propTypes = {
   history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
+  inmate: PropTypes.object,
 };
-export default LettersCompose;
+
+LettersCompose.defaultProps = {
+  inmate: {},
+};
+
+function mapStateToProps(state) {
+  return { inmate: state.getIn(['letters', 'letterInfo', 'inmate']) };
+}
+export default connect(mapStateToProps)(LettersCompose);
