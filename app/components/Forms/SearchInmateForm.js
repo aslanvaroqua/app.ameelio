@@ -62,9 +62,8 @@ class SearchInmateForm extends PureComponent {
   };
 
   onClickMail = (inmate) => {
-    const { history, updateLetterInfo: updateLetterInfoAction } = this.props;
+    const { updateLetterInfo: updateLetterInfoAction } = this.props;
     updateLetterInfoAction('inmate', inmate);
-    history.push('/app/letters/compose');
   };
 
   render() {
@@ -158,7 +157,6 @@ class SearchInmateForm extends PureComponent {
 
 SearchInmateForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   updateLetterInfo: PropTypes.func.isRequired,
 };
 

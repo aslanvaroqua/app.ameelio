@@ -4,11 +4,13 @@ import {
   fork,
   put,
   // select,
+  takeEvery,
 } from 'redux-saga/effects';
 import { Stitch } from 'mongodb-stitch-browser-sdk';
 import uuidv4 from 'uuid/v4';
+import { push } from 'connected-react-router';
 
-import { SEND_LETTER } from '../actions/actionConstants';
+import { SEND_LETTER, UPDATE_LETTER_INFO } from '../actions/actionConstants';
 import {
   uploadImageFailure,
   verifyRecipientAddressFailure,
@@ -165,8 +167,26 @@ function* watchSendLetterRequest() {
   yield takeLatest(SEND_LETTER, sendLetter);
 }
 
+function* updateLetterInfo(action) {
+  const { payload: { key } } = action;
+  if (key === 'inmate') {
+    console.log('updateLetterInfo');
+    yield put(push('/app/letters/compose'));
+    // window.location.href = '/app/letters/compose';
+  } else if (key === 'imageBase64') {
+    console.log('updateLetterInfo');
+    yield put(push('/app/letters/review'));
+    // window.location.href = '/app/letters/review';
+  }
+}
+
+function* watchUpdateLetterInfo() {
+  yield takeEvery(UPDATE_LETTER_INFO, updateLetterInfo);
+}
+
 const lettersSagas = [
   fork(watchSendLetterRequest),
+  fork(watchUpdateLetterInfo),
 ];
 
 export default lettersSagas;

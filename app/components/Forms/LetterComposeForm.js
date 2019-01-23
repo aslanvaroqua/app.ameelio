@@ -53,7 +53,7 @@ class LetterComposeForm extends PureComponent {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { history, updateLetterInfo: updateLetterInfoAction } = this.props;
+    const { updateLetterInfo: updateLetterInfoAction } = this.props;
     const { message, images } = this.state;
     if (message.length === 0) {
       this.setState({ error: true });
@@ -67,7 +67,6 @@ class LetterComposeForm extends PureComponent {
 
         updateLetterInfoAction('message', message);
         updateLetterInfoAction('imageBase64', imagesBase64[0]);
-        history.push('/app/letters/review');
       } catch (error) {
         console.log(error);
       }
@@ -123,7 +122,6 @@ class LetterComposeForm extends PureComponent {
 
 LetterComposeForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
   updateLetterInfo: PropTypes.func.isRequired,
 };
 

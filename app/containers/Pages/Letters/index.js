@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import brand from 'dan-api/dummy/brand';
 import { PapperBlock, SimpleAccordion, SearchInmateForm } from 'dan-components';
@@ -10,7 +9,6 @@ class Letters extends React.Component {
   render() {
     const title = brand.name + ' - Letters';
     const description = brand.desc;
-    const { history } = this.props;
     return (
       <div>
         <Helmet>
@@ -31,14 +29,11 @@ class Letters extends React.Component {
           <SimpleAccordion content={accordionContent} />
         </PapperBlock>
         <PapperBlock title="Search inmate" desc="" icon="">
-          <SearchInmateForm history={history} />
+          <SearchInmateForm />
         </PapperBlock>
       </div>
     );
   }
 }
 
-Letters.propTypes = {
-  history: PropTypes.object.isRequired,
-};
 export default Letters;

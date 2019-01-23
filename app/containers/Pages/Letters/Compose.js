@@ -10,7 +10,7 @@ class LettersCompose extends React.Component {
   render() {
     const title = brand.name + ' - Compose';
     const description = brand.desc;
-    const { inmate, history } = this.props;
+    const { inmate } = this.props;
     return (
       <div>
         <Helmet>
@@ -41,7 +41,7 @@ class LettersCompose extends React.Component {
           )}
         </PapperBlock>
         <PapperBlock title="Write message" desc="" icon="">
-          <LetterComposeForm history={history} />
+          <LetterComposeForm />
         </PapperBlock>
       </div>
     );
@@ -49,7 +49,6 @@ class LettersCompose extends React.Component {
 }
 
 LettersCompose.propTypes = {
-  history: PropTypes.object.isRequired,
   inmate: PropTypes.object,
 };
 

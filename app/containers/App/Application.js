@@ -25,9 +25,9 @@ class Application extends React.Component {
         <Switch>
           <Route exact path="/app" component={BlankPage} />
           <Route path="/app/dashboard" component={DashboardPage} />
-          <Route exact path="/app/letters" component={Letters} />
-          <Route path="/app/letters/compose" component={LettersCompose} />
-          <Route path="/app/letters/review" component={LettersReview} />
+          <Route exact path="/app/letters" render={(props) => <Letters {...props} history={history} />} />
+          <Route path="/app/letters/compose" render={(props) => <LettersCompose {...props} history={history} />} />
+          <Route path="/app/letters/review" render={(props) => <LettersReview {...props} history={history} />} />
           <Route path="/app/form" component={Form} />
           <Route path="/app/table" component={Table} />
           <Route path="/app/page-list" component={Parent} />
