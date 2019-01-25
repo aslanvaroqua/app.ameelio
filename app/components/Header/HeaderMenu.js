@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import { NavLink } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import classNames from 'classnames';
 import Tooltip from '@material-ui/core/Tooltip';
 import Ionicon from 'react-ionicons';
@@ -20,7 +20,7 @@ import DropListMenu from './DropListMenu';
 import MegaMenu from './MegaMenu';
 import UserMenu from './UserMenu';
 import styles from './header-jss';
-import SearchUi from '../Search/SearchUi';
+// import SearchUi from '../Search/SearchUi';
 
 const elem = document.documentElement;
 
@@ -85,7 +85,7 @@ class HeaderMenu extends React.Component {
       type,
       dataMenu,
       fixed,
-      history,
+      // history,
       openGuide,
       mode,
       toggleDrawerOpen,
@@ -148,14 +148,14 @@ class HeaderMenu extends React.Component {
               {brand.name}
             </NavLink>
           </Hidden>
-          <div className={classes.searchHeaderMenu}>
+          {/* <div className={classes.searchHeaderMenu}>
             <div className={classNames(classes.wrapper, classes.dark)}>
               <div className={classes.search}>
                 <SearchIcon />
               </div>
               <SearchUi history={history} />
             </div>
-          </div>
+          </div> */}
           <Toolbar>
             <UserMenu dark />
           </Toolbar>
@@ -205,7 +205,7 @@ HeaderMenu.propTypes = {
   openGuide: PropTypes.func.isRequired,
   toggleDrawerOpen: PropTypes.func.isRequired,
   loadTransition: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
+  // history: PropTypes.object.isRequired,
   logoLink: PropTypes.string,
   isLogin: PropTypes.bool
 };

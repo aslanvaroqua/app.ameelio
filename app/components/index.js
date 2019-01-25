@@ -13,6 +13,8 @@ export LoginForm from './Forms/LoginForm';
 export RegisterForm from './Forms/RegisterForm';
 export ResetForm from './Forms/ResetForm';
 export Notification from './Notification/Notification';
+export SearchInmateForm from './Forms/SearchInmateForm';
+export LetterComposeForm from './Forms/LetterComposeForm';
 // Table
 export EmptyData from './Tables/EmptyData';
 // Error
@@ -29,3 +31,7 @@ export ShowcaseSlider from './LandingPage/ShowcaseSlider';
 export Technology from './LandingPage/Technology';
 export Testimonials from './LandingPage/Testimonials';
 export SideNav from './LandingPage/SideNav';
+// Accordion
+export SimpleAccordion from './Accordion/SimpleAccordion';
+// Cards
+export InmateCard from './CardPaper/InmateCard';
