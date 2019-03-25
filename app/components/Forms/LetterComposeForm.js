@@ -103,13 +103,13 @@ class LetterComposeForm extends PureComponent {
                 Please compose a message.
               </Typography>
             )}
-            <Typography variant="subtitle2" component="p" style={{ marginLeft: 25, color: message.length > 500 ? 'red' : 'inherit' }}>
+            <Typography variant="subtitle2" component="p" style={{ marginLeft: 25, color: message.length > 3000 ? 'red' : 'inherit' }}>
               Characters left:
               {' '}
-              {500 - message.length}
+              {3000 - message.length}
             </Typography>
             <Grid item md={3} style={{ marginTop: 20 }}>
-              <Button color="primary" variant="contained" type="submit" disabled={message.length > 500}>
+              <Button color="primary" variant="contained" type="submit" disabled={message.length > 3000}>
                 Continue
               </Button>
             </Grid>

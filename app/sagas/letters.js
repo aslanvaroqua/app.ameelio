@@ -4,7 +4,7 @@ import {
   fork,
   put,
   // select,
-  takeEvery,
+  takeEvery
 } from 'redux-saga/effects';
 import { Stitch } from 'mongodb-stitch-browser-sdk';
 import uuidv4 from 'uuid/v4';
@@ -15,32 +15,42 @@ import {
   uploadImageFailure,
   verifyRecipientAddressFailure,
   sendLetterFailure,
-  sendLetterSuccess,
+  sendLetterSuccess
 } from '../actions/LettersActions';
+import letterTemplate from '../utils/letterTemplate';
 
 // function getStitchClient(state) {
 //   return state.getIn(['auth', 'stitchClient']);
 // }
 
 function s3Upload({ imageKey, base64Image }) {
-  return Stitch.defaultAppClient.callFunction('uploadImage', [imageKey, base64Image]);
+  return Stitch.defaultAppClient.callFunction('uploadImage', [
+    imageKey,
+    base64Image
+  ]);
 }
 
 function validateAddress({ recipientAddress }) {
-  return Stitch.defaultAppClient.callFunction('validateAddress', [recipientAddress]);
+  return Stitch.defaultAppClient.callFunction('validateAddress', [
+    recipientAddress
+  ]);
 }
 
 function sendLetterRequest({
   imageUrl,
   recipientAddress,
   senderAddress,
-  message,
+  message
 }) {
-  return Stitch.defaultAppClient.callFunction('sendLetter', [
+  //
+  const file = letterTemplate(imageUrl, message);
+  //
+  return Stitch.defaultAppClient.callFunction('sendLetter2', [
     recipientAddress,
     senderAddress,
-    imageUrl,
-    message,
+    // imageUrl,
+    // message,
+    file
   ]);
 }
 
@@ -48,29 +58,33 @@ function* sendLetterSaga({
   imageUrl,
   recipientAddress,
   senderAddress,
-  message,
+  message
 }) {
   try {
     const result = yield call(sendLetterRequest, {
       imageUrl,
       recipientAddress,
       senderAddress,
-      message,
+      message
     });
     console.log('letter sent successfully', result);
     if (result.error) {
-      yield put(sendLetterFailure({
-        sendLetterError: result.error.message,
-      }));
+      yield put(
+        sendLetterFailure({
+          sendLetterError: result.error.message
+        })
+      );
     } else {
       alert(`Letter is accessible via ${result.url}`);
+      yield put(sendLetterSuccess());
     }
-    yield put(sendLetterSuccess());
   } catch (error) {
     console.log(error);
-    yield put(sendLetterFailure({
-      sendLetterError: 'Error sending letter. Try again.'
-    }));
+    yield put(
+      sendLetterFailure({
+        sendLetterError: 'Error sending letter. Try again.'
+      })
+    );
   }
 }
 
@@ -78,7 +92,7 @@ function* verifyAddresses({
   imageUrl,
   recipientAddress,
   senderAddress,
-  message,
+  message
 }) {
   const deliverErrors = [
     'deliverable_incorrect_unit',
@@ -86,17 +100,21 @@ function* verifyAddresses({
     'undeliverable'
   ];
   const deliverErrorsObj = {
-    deliverable_incorrect_unit: "The address is deliverable to the building's default address but the secondary unit provided may not exist. There is a chance the mail will not reach the intended recipient",
-    deliverable_missing_unit: "The address is deliverable to the building's default address but is missing secondary unit information. There is a chance the mail will not reach the intended recipient.",
-    undeliverable: 'The address is not deliverable according to the USPS.',
+    deliverable_incorrect_unit:
+      "The address is deliverable to the building's default address but the secondary unit provided may not exist. There is a chance the mail will not reach the intended recipient",
+    deliverable_missing_unit:
+      "The address is deliverable to the building's default address but is missing secondary unit information. There is a chance the mail will not reach the intended recipient.",
+    undeliverable: 'The address is not deliverable according to the USPS.'
   };
   try {
     const result = yield call(validateAddress, { recipientAddress });
     console.log('verify recipientAddress result', result);
     if (deliverErrors.includes(result.deliverability)) {
-      yield put(verifyRecipientAddressFailure({
-        recipientAddressError: deliverErrorsObj[result.deliverability],
-      }));
+      yield put(
+        verifyRecipientAddressFailure({
+          recipientAddressError: deliverErrorsObj[result.deliverability]
+        })
+      );
     } else {
       yield call(sendLetterSaga, {
         imageUrl,
@@ -107,17 +125,20 @@ function* verifyAddresses({
           address_city: result.components.city,
           address_state: result.components.state,
           address_zip: result.components.zip_code,
-          address_country: 'US',
+          address_country: 'US'
         },
         senderAddress,
-        message,
+        message
       });
     }
   } catch (error) {
     console.log(error);
-    yield put(verifyRecipientAddressFailure({
-      recipientAddressError: 'Error, something went wrong while verifying recipient address.',
-    }));
+    yield put(
+      verifyRecipientAddressFailure({
+        recipientAddressError:
+          'Error, something went wrong while verifying recipient address.'
+      })
+    );
   }
 }
 
@@ -125,7 +146,7 @@ function* uploadImage({
   base64Image,
   recipientAddress,
   senderAddress,
-  message,
+  message
 }) {
   try {
     const s3Bucket = 'skyhosting-ameelio-dev';
@@ -136,30 +157,29 @@ function* uploadImage({
       imageUrl: `https://s3.amazonaws.com/${s3Bucket}/${imageKey}`,
       recipientAddress,
       senderAddress,
-      message,
+      message
     });
   } catch (error) {
     console.log(error);
-    yield put(uploadImageFailure({
-      imageUploadError: 'Error uploading image.'
-    }));
+    yield put(
+      uploadImageFailure({
+        imageUploadError: 'Error uploading image.'
+      })
+    );
   }
 }
 
 function* sendLetter(action) {
   const {
     payload: {
-      base64Image,
-      recipientAddress,
-      senderAddress,
-      message,
-    },
+      base64Image, recipientAddress, senderAddress, message
+    }
   } = action;
   yield call(uploadImage, {
     base64Image,
     recipientAddress,
     senderAddress,
-    message,
+    message
   });
 }
 
@@ -168,7 +188,9 @@ function* watchSendLetterRequest() {
 }
 
 function* updateLetterInfo(action) {
-  const { payload: { key } } = action;
+  const {
+    payload: { key }
+  } = action;
   if (key === 'inmate') {
     console.log('updateLetterInfo');
     yield put(push('/app/letters/compose'));
@@ -186,7 +208,7 @@ function* watchUpdateLetterInfo() {
 
 const lettersSagas = [
   fork(watchSendLetterRequest),
-  fork(watchUpdateLetterInfo),
+  fork(watchUpdateLetterInfo)
 ];
 
 export default lettersSagas;

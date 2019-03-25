@@ -13,9 +13,10 @@ class UploadInputImg extends React.Component {
             acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
             showPreviews
             maxSize={5000000}
-            filesLimit={5}
+            // filesLimit={5}
             text="Drag and drop image(s) here or click"
             updateImages={updateImages}
+            multiple={false}
           />
         </div>
       </Fragment>
@@ -24,6 +25,6 @@ class UploadInputImg extends React.Component {
 }
 
 UploadInputImg.propTypes = {
-  updateImages: PropTypes.func.isRequired,
+  updateImages: PropTypes.func.isRequired
 };
 export default UploadInputImg;
