@@ -38,7 +38,7 @@ class LettersArchive extends React.Component {
           {lettersUrl.length > 0 && (
             <List className={classes.list} style={{ marginTop: 40 }}>
               {lettersUrl.map((url, index) => (
-                <ListItem>
+                <ListItem key={url}>
                   <a href={url} target="_blank" rel="noopener noreferrer">
                     Letter
                     {' '}
