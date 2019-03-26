@@ -23,6 +23,9 @@ const styles = theme => ({
     zIndex: '999',
     marginLeft: -30,
   },
+  message: {
+    whiteSpace: 'pre-wrap',
+  }
 });
 
 class LettersReview extends React.Component {
@@ -127,7 +130,7 @@ class LettersReview extends React.Component {
           <Grid item md={6} xs={12}>
             <PapperBlock title="Message" desc="" icon="">
               {message !== '' && (
-                <Typography variant="subtitle1" component="h3">{message}</Typography>
+                <Typography variant="subtitle1" component="h3" className={classes.message}>{message}</Typography>
               )}
             </PapperBlock>
           </Grid>

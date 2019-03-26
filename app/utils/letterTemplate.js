@@ -15,7 +15,7 @@ export default (imageSrc, message) => `
       body {
         width: 8.5in;
         height: 11in;
-        margin: 0;
+        margin: 27mm 0mm 27mm 0mm;
         padding: 0;
         font-family: 'Open Sans';
       }
@@ -31,13 +31,15 @@ export default (imageSrc, message) => `
       }
       .image {
         text-align: center;
-      }
-      #logo {
         margin-top: 20px;
       }
       .wrapper {
         position: absolute;
         top: 2.75in;
+      }
+      .message {
+        white-space: pre-wrap;
+        font-size: 14px;
       }
     </style>
   </head>
@@ -45,8 +47,8 @@ export default (imageSrc, message) => `
     <div class="page">
       <div class="page-content">
         <div class='wrapper'>
-          <p class="image"><img id="Photo" src=${imageSrc} width="420px" /></p>
-          <p>${message}</p>
+          <p class="image"><img src=${imageSrc} width="420px" /></p>
+          <p class="message">${message}</p>
          </div>
       </div>
     </div>
