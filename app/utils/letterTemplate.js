@@ -15,8 +15,9 @@ export default (imageSrc, message) => `
       body {
         width: 8.5in;
         height: 11in;
-        margin: 27mm 0mm 27mm 0mm;
+        margin: 0;
         padding: 0;
+        padding-bottom: 27mm;
         font-family: 'Open Sans';
       }
       .page {
