@@ -14,20 +14,24 @@ class ShowcaseSlider extends React.Component {
         <div className={slideMode ? classes.fullWidth : classes.container}>
           <Grid container className={classes.root} spacing={40}>
             <Grid item md={6} xs={12}>
-              <Title title="Showcase" align="left" monocolor={slideMode && true} />
+              <Title
+                title="Showcase"
+                align="left"
+                monocolor={slideMode && true}
+              />
               <ShowcaseCard
                 landscape
                 title="Nam sollicitudin"
                 desc="Aenean facilisis vitae purus facilisis semper."
                 action="Try it"
-                image="/images/screen/thumb1.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb1.jpg"
               />
               <ShowcaseCard
                 landscape
                 title="Vestibulum nec"
                 desc="Cras convallis lacus orci, tristique tincidunt magna"
                 action="See Demo"
-                image="/images/screen/thumb3.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb3.jpg"
               />
             </Grid>
             <Grid item md={6} xs={12}>
@@ -36,21 +40,21 @@ class ShowcaseSlider extends React.Component {
                 title="Curabitur"
                 desc="Nulla vehicula leo ut augue tincidunt"
                 action="See Demo"
-                image="/images/screen/thumb5.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb5.jpg"
               />
               <ShowcaseCard
                 landscape
                 title="Nam sollicitudin"
                 desc="Aenean facilisis vitae purus facilisis semper."
                 action="Try It"
-                image="/images/screen/thumb2.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb2.jpg"
               />
               <ShowcaseCard
                 landscape
                 title="Nam posuere accumsan"
                 desc="Duis sed augue phasellus ante massa."
                 action="See Demo"
-                image="/images/screen/thumb4.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb4.jpg"
               />
             </Grid>
           </Grid>
@@ -60,7 +64,6 @@ class ShowcaseSlider extends React.Component {
   }
 }
 
-
 ShowcaseSlider.propTypes = {
   classes: PropTypes.object.isRequired,
   slideMode: PropTypes.bool
@@ -69,6 +72,5 @@ ShowcaseSlider.propTypes = {
 ShowcaseSlider.defaultProps = {
   slideMode: false
 };
-
 
 export default withStyles(styles)(ShowcaseSlider);

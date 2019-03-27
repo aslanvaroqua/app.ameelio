@@ -22,14 +22,12 @@ function ParallaxDeco(props) {
             tag="figure"
           >
             <svg
-              className={
-                classNames(
-                  classes.parallaxVertical,
-                  classes.parallaxPetal1
-                )
-              }
+              className={classNames(
+                classes.parallaxVertical,
+                classes.parallaxPetal1
+              )}
             >
-              <use xlinkHref="/images/decoration/petal3.svg#Petal-3" />
+              <use xlinkHref="https://s3.amazonaws.com/ameelio-assets/public/decoration/petal3.svg#Petal-3" />
             </svg>
           </Parallax>
           <Parallax
@@ -39,14 +37,12 @@ function ParallaxDeco(props) {
             tag="figure"
           >
             <svg
-              className={
-                classNames(
-                  classes.parallaxVertical,
-                  classes.parallaxPetal2
-                )
-              }
+              className={classNames(
+                classes.parallaxVertical,
+                classes.parallaxPetal2
+              )}
             >
-              <use xlinkHref="/images/decoration/petal4.svg#Petal-4" />
+              <use xlinkHref="https://s3.amazonaws.com/ameelio-assets/public/decoration/petal4.svg#Petal-4" />
             </svg>
           </Parallax>
         </div>
@@ -56,7 +52,7 @@ function ParallaxDeco(props) {
 }
 
 ParallaxDeco.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const ParallaxDecoStyled = withStyles(styles)(ParallaxDeco);
@@ -70,18 +66,22 @@ class Showcase extends React.Component {
         <div className={classes.container}>
           <Grid container className={classes.root} spacing={40}>
             <Grid item sm={6} md={4} xs={12}>
-              <Title title="Showcase" align={width === 'lg' ? 'left' : 'center'} monocolor={slideMode && true} />
+              <Title
+                title="Showcase"
+                align={width === 'lg' ? 'left' : 'center'}
+                monocolor={slideMode && true}
+              />
               <ShowcaseCard
                 title="Nam sollicitudin"
                 desc="Aenean facilisis vitae purus facilisis semper."
                 action="Try it"
-                image="/images/screen/thumb1.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb1.jpg"
               />
               <ShowcaseCard
                 title="Vestibulum nec"
                 desc="Cras convallis lacus orci, tristique tincidunt magna"
                 action="See Demo"
-                image="/images/screen/thumb3.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb3.jpg"
               />
             </Grid>
             <Grid item sm={6} md={4} xs={12}>
@@ -89,13 +89,13 @@ class Showcase extends React.Component {
                 title="Curabitur"
                 desc="Nulla vehicula leo ut augue tincidunt"
                 action="See Demo"
-                image="/images/screen/thumb5.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb5.jpg"
               />
               <ShowcaseCard
                 title="Nam sollicitudin"
                 desc="Aenean facilisis vitae purus facilisis semper."
                 action="Try It"
-                image="/images/screen/thumb2.jpg"
+                image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb2.jpg"
               />
             </Grid>
             <Grid item sm={6} md={4} xs={12}>
@@ -104,7 +104,7 @@ class Showcase extends React.Component {
                   title="Nam posuere accumsan"
                   desc="Duis sed augue phasellus ante massa."
                   action="See Demo"
-                  image="/images/screen/thumb4.jpg"
+                  image="https://s3.amazonaws.com/ameelio-assets/public/screen/thumb4.jpg"
                 />
               </div>
             </Grid>
@@ -115,7 +115,6 @@ class Showcase extends React.Component {
   }
 }
 
-
 Showcase.propTypes = {
   classes: PropTypes.object.isRequired,
   width: PropTypes.string.isRequired,
@@ -125,6 +124,5 @@ Showcase.propTypes = {
 Showcase.defaultProps = {
   slideMode: false
 };
-
 
 export default withWidth()(withStyles(styles)(Showcase));

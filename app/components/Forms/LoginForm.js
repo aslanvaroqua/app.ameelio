@@ -16,7 +16,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import AllInclusive from '@material-ui/icons/AllInclusive';
 import Brightness5 from '@material-ui/icons/Brightness5';
-import People from '@material-ui/icons/People';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
@@ -107,10 +106,6 @@ class LoginForm extends React.Component {
               >
                 <Brightness5 className={classNames(classes.leftIcon, classes.iconSmall)} />
                 Facebook
-              </Button>
-              <Button variant="outlined" size="small" className={classes.cyanBtn} type="button">
-                <People className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Socmed 3
               </Button>
             </div>
             <ContentDivider content="Or sign in with email" />

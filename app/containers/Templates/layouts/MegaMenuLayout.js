@@ -45,12 +45,7 @@ class DropMenuLayout extends React.Component {
           logoLink="/app"
         />
         <main
-          className={
-            classNames(
-              classes.content,
-              classes.highMargin
-            )
-          }
+          className={classNames(classes.content, classes.highMargin)}
           id="mainContent"
         >
           <Decoration
@@ -60,14 +55,36 @@ class DropMenuLayout extends React.Component {
             bgPosition={bgPosition}
             horizontalMenu
           />
-          <section className={classNames(classes.mainWrap, classes.topbarLayout)}>
+          <section
+            className={classNames(classes.mainWrap, classes.topbarLayout)}
+          >
             {titleException.indexOf(history.location.pathname) < 0 && (
               <div className={classes.pageTitle}>
-                <Typography component="h4" className={bgPosition === 'header' ? classes.darkTitle : classes.lightTitle} variant="h4">{place}</Typography>
-                <BreadCrumb separator=" / " theme={bgPosition === 'header' ? 'dark' : 'light'} location={history.location} />
+                <Typography
+                  component="h4"
+                  className={
+                    bgPosition === 'header'
+                      ? classes.darkTitle
+                      : classes.lightTitle
+                  }
+                  variant="h4"
+                >
+                  {place}
+                </Typography>
+                <BreadCrumb
+                  separator=" / "
+                  theme={bgPosition === 'header' ? 'dark' : 'light'}
+                  location={history.location}
+                />
               </div>
             )}
-            { !pageLoaded && (<img src="/images/spinner.gif" alt="spinner" className={classes.circularProgress} />) }
+            {!pageLoaded && (
+              <img
+                src="https://s3.amazonaws.com/ameelio-assets/public/spinner.gif"
+                alt="spinner"
+                className={classes.circularProgress}
+              />
+            )}
             <Fade
               in={pageLoaded}
               mountOnEnter
@@ -76,7 +93,7 @@ class DropMenuLayout extends React.Component {
             >
               <div className={!pageLoaded ? classes.hideApp : ''}>
                 {/* Application content will load here */}
-                { children }
+                {children}
               </div>
             </Fade>
           </section>
@@ -105,4 +122,4 @@ DropMenuLayout.propTypes = {
   handleOpenGuide: PropTypes.func.isRequired
 };
 
-export default (withStyles(styles)(DropMenuLayout));
+export default withStyles(styles)(DropMenuLayout);
