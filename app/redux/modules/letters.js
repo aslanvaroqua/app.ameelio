@@ -60,6 +60,9 @@ export default function reducer(state = initialImmutableState, action = {}) {
         mutableState.set('imageUploadError', '');
         mutableState.set('recipientAddressError', '');
         mutableState.set('sendLetterError', '');
+        mutableState.setIn(['letterInfo', 'inmate'], null);
+        mutableState.setIn(['letterInfo', 'message'], '');
+        mutableState.setIn(['letterInfo', 'imageBase64'], '');
         mutableState.set(
           'lettersUrl',
           mutableState.get('lettersUrl').push(action.payload.letterUrl)
