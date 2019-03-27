@@ -7,15 +7,15 @@ import Dashboard from '../Templates/Dashboard';
 import {
   Parent,
   DashboardPage,
-  BlankPage,
+  HomePage,
   Form,
   Table,
   Error,
   NotFound,
   Letters,
   LettersCompose,
-  LettersReview,
-  LettersArchive
+  LettersReview
+  // LettersArchive
 } from '../pageListAsync';
 
 class Application extends React.Component {
@@ -24,7 +24,7 @@ class Application extends React.Component {
     return (
       <Dashboard history={history} changeMode={changeMode}>
         <Switch>
-          <Route exact path="/app" component={BlankPage} />
+          <Route exact path="/app" component={HomePage} />
           <Route path="/app/dashboard" component={DashboardPage} />
           <Route
             exact
@@ -39,10 +39,10 @@ class Application extends React.Component {
             path="/app/letters/review"
             render={props => <LettersReview {...props} history={history} />}
           />
-          <Route
+          {/* <Route
             path="/app/letters/archive"
             render={props => <LettersArchive {...props} history={history} />}
-          />
+          /> */}
           <Route path="/app/form" component={Form} />
           <Route path="/app/table" component={Table} />
           <Route path="/app/page-list" component={Parent} />

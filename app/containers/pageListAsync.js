@@ -77,3 +77,7 @@ export const LettersArchive = Loadable({
   loader: () => import('./Pages/Letters/Archive'),
   loading: Loading
 });
+export const HomePage = Loadable({
+  loader: () => import('./Pages/HomePage'),
+  loading: Loading
+});

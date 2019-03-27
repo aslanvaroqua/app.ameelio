@@ -77,7 +77,7 @@ function* sendLetterSaga({
     } else {
       // alert(`Letter is accessible via ${result.url}`);
       yield put(sendLetterSuccess(result.url));
-      yield put(push('/app/letters/archive'));
+      yield put(push('/app'));
     }
   } catch (error) {
     console.log(error);
