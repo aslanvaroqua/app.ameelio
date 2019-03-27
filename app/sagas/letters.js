@@ -176,12 +176,22 @@ function* sendLetter(action) {
       base64Image, recipientAddress, senderAddress, message
     }
   } = action;
-  yield call(uploadImage, {
-    base64Image,
-    recipientAddress,
-    senderAddress,
-    message
-  });
+  console.log('base64Image', typeof base64Image);
+  if (base64Image === '') {
+    yield call(verifyAddresses, {
+      imageUrl: '',
+      recipientAddress,
+      senderAddress,
+      message
+    });
+  } else {
+    yield call(uploadImage, {
+      base64Image,
+      recipientAddress,
+      senderAddress,
+      message
+    });
+  }
 }
 
 function* watchSendLetterRequest() {

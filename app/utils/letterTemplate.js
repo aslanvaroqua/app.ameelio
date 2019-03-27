@@ -1,3 +1,10 @@
+const getImageElement = imageSrc => {
+  if (imageSrc === '') {
+    return '';
+  }
+  return `<p class="image"><img src=${imageSrc} width="420px" /></p>`;
+};
+
 export default (imageSrc, message) => `
   <html>
   <head>
@@ -48,7 +55,7 @@ export default (imageSrc, message) => `
     <div class="page">
       <div class="page-content">
         <div class='wrapper'>
-          <p class="image"><img src=${imageSrc} width="420px" /></p>
+          ${getImageElement(imageSrc)}
           <p class="message">${message}</p>
          </div>
       </div>

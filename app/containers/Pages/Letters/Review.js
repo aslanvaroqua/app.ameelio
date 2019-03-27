@@ -37,7 +37,7 @@ class LettersReview extends React.Component {
       message,
       imageBase64,
     } = this.props;
-    if (inmate.name && message && imageBase64) {
+    if (inmate.name && message) {
       const recipientAddress = {
         recipient: `${inmate.name}, ${inmate.number}`,
         primary_line: `${inmate.addressLine1}, ${inmate.pBox}`,
