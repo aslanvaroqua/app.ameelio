@@ -76,7 +76,12 @@ function* sendLetterSaga({
       );
     } else {
       // alert(`Letter is accessible via ${result.url}`);
-      yield put(sendLetterSuccess(result.url));
+      yield put(
+        sendLetterSuccess({
+          recipient: recipientAddress,
+          letterUrl: result.url
+        })
+      );
       yield put(push('/app'));
     }
   } catch (error) {

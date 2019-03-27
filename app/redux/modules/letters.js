@@ -19,7 +19,7 @@ const initialState = {
     message: '',
     imageBase64: ''
   },
-  lettersUrl: []
+  lettersSent: []
 };
 const initialImmutableState = fromJS(initialState);
 
@@ -64,8 +64,8 @@ export default function reducer(state = initialImmutableState, action = {}) {
         mutableState.setIn(['letterInfo', 'message'], '');
         mutableState.setIn(['letterInfo', 'imageBase64'], '');
         mutableState.set(
-          'lettersUrl',
-          mutableState.get('lettersUrl').push(action.payload.letterUrl)
+          'lettersSent',
+          mutableState.get('lettersSent').push(action.payload.letterSent)
         );
       });
     default:

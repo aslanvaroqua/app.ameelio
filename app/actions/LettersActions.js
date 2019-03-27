@@ -40,7 +40,7 @@ export const sendLetterFailure = ({ sendLetterError }) => ({
 });
 
 // Send letter success
-export const sendLetterSuccess = letterUrl => ({
+export const sendLetterSuccess = letterSent => ({
   type: types.SEND_LETTER_SUCCESS,
-  payload: { letterUrl }
+  payload: { letterSent }
 });

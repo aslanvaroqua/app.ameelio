@@ -25,7 +25,7 @@ class HomePage extends React.Component {
     const title = brand.name + ' - Home Page';
     const description = brand.desc;
 
-    const { lettersUrl, classes } = this.props;
+    const { lettersSent, classes } = this.props;
 
     return (
       <div>
@@ -54,16 +54,29 @@ class HomePage extends React.Component {
           </Typography>
         </PapperBlock>
         <PapperBlock title="Sent Letters" desc="" icon="">
-          {lettersUrl.length > 0 ? (
+          {lettersSent.length > 0 ? (
             <List className={classes.list} style={{ marginTop: 40 }}>
-              {lettersUrl.map((url, index) => (
-                <ListItem key={url}>
-                  <a href={url} target="_blank" rel="noopener noreferrer">
-                    Letter
-                    {' '}
-                    {index + 1}
-                  </a>
-                </ListItem>
+              {lettersSent.map((letter, index) => (
+                <div>
+                  <ListItem key={letter.url}>
+                    <Typography variant="subtitle2" component="h3">
+                      To:
+                      {' '}
+                      {letter.recipient.name}
+                    </Typography>
+                  </ListItem>
+                  <ListItem key={letter.url}>
+                    <a
+                      href={letter.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Letter
+                      {' '}
+                      {index + 1}
+                    </a>
+                  </ListItem>
+                </div>
               ))}
             </List>
           ) : (
@@ -79,12 +92,12 @@ class HomePage extends React.Component {
 
 HomePage.propTypes = {
   classes: PropTypes.object.isRequired,
-  lettersUrl: PropTypes.array.isRequired
+  lettersSent: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
-  const lettersUrl = state.getIn(['letters', 'lettersUrl']);
-  return { lettersUrl: lettersUrl.toArray() };
+  const lettersSent = state.getIn(['letters', 'lettersSent']);
+  return { lettersSent: lettersSent.toArray() };
 }
 export default compose(
   connect(mapStateToProps),
