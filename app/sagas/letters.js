@@ -79,7 +79,7 @@ function* sendLetterSaga({
       yield put(
         sendLetterSuccess({
           recipient: recipientAddress,
-          letterUrl: result.url
+          url: result.url
         })
       );
       yield put(push('/app'));
