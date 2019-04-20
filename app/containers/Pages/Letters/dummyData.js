@@ -1,7 +1,7 @@
 export const accordionContent = [
   { heading: '1. Search', content: 'Find any prisoner in the U.S. using our nationwide inmate databse.' },
   { heading: '2. Compose', content: 'Simply type and attach photos.' },
-  { heading: '3. Send', content: 'We convert each letter into physical mail, and ship it using a trsuted partner.' },
+  { heading: '3. Send', content: 'We convert each letter into physical mail, and ship it using a trusted partner.' },
   { heading: '4. Receive', content: 'We include a pre-addressed return envelope in each letter we mail.' },
 ];
 
