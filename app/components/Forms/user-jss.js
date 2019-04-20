@@ -240,8 +240,8 @@ const styles = theme => ({
     margin: 0
   },
   topMargin: {
-    'marginTop':'10vw',
-    'marginBottom':'10vw',
+    'marginTop':'1vw',
+    'marginBottom':'1vw',
 
   },
   noPadding: {
@@ -273,7 +273,11 @@ const styles = theme => ({
     },
   },
   regLogo: {
-    height:'50vw',
+
+    marginTop:'20px',
+    // marginBottom:'20px',
+    marginLeft:'10%',
+    maxWidth: '55vw',
   },
   buttonLink: {
     background: 'none',

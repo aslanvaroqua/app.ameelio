@@ -75,7 +75,7 @@ class RegisterForm extends React.Component {
       <Fragment>
 
           <NavLink to="/" className={classNames(classes.regLogo, classes.outer)}>
-            <img className={classes.regLogo} src={logo} alt={brand.name} />
+            <img className={classes.regLogo} src="https://ameelio.com/build/images/logo.png" alt={brand.name} />
 
           </NavLink>
         <Paper className={classNames(classes.paperWrap, classes.topMargin, deco && classes.petal)}>
@@ -90,7 +90,7 @@ class RegisterForm extends React.Component {
               </Button>
             </div>
           {/* </Hidden> */}
-          <Typography variant="h4" className={classes.title} gutterBottom>
+          <Typography variant="h6" className={classes.title} gutterBottom>
             Register
           </Typography>
           <Typography variant="caption" className={classes.subtitle} gutterBottom align="center">

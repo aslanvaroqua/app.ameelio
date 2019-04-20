@@ -63,7 +63,7 @@ class LoginForm extends React.Component {
       <Fragment>
         <Hidden mdUp>
           <NavLink to="/" className={classNames(classes.brand, classes.outer)}>
-            <img src={logo} alt={brand.name} />
+            <img src="https://ameelio.com/build/images/logo.png" alt={brand.name} />
           </NavLink>
         </Hidden>
         <Paper className={classNames(classes.paperWrap, deco && classes.petal)}>
