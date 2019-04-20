@@ -23,7 +23,7 @@ import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
 import styles from './user-jss';
 import fbtn from 'dan-images/oauth/fbtn.png';
-import gbtn from 'dan-images/oauth/gbtn.png'
+import gbtn from 'dan-images/oauth/gbtn.png';
 
 
 // validation functions
@@ -73,17 +73,16 @@ class RegisterForm extends React.Component {
     const { tab } = this.state;
     return (
       <Fragment>
-        <Hidden mdUp>
-          <NavLink to="/" className={classNames(classes.brand, classes.outer)}>
+
+          <NavLink to="/" className={classNames(classes.regLogo, classes.outer)}>
             <img className={classes.regLogo} src={logo} alt={brand.name} />
 
           </NavLink>
-        </Hidden>
         <Paper className={classNames(classes.paperWrap, classes.topMargin, deco && classes.petal)}>
           {/* <Hidden smDown> */}
             <div className={classes.topBar}>
               <NavLink to="/" className={classes.brand}>
-                <img className={classes.regLogo} src={logo} alt={brand.name} />
+                <img  src={logo} alt={brand.name} />
               </NavLink>
               <Button size="small" className={classes.buttonLink} component={NavLink} to="/login">
                 <Icon className={classes.icon}>arrow_forward</Icon>
@@ -102,11 +101,11 @@ class RegisterForm extends React.Component {
 
             
 <Button fullWidth variant="outlined" onClick={onSubmitGoogle} className={classes.noPadding} size="large" type="button">
-  <img className={classes.noPadding} src={gbtn} alt={brand.name} />
+  <img className={classes.noPadding} src={gbtn} alt="Google" />
 
 </Button>
 <Button fullWidth variant="outlined" onClick={onSubmitFacebook} className={classes.noPadding} size="large"  type="button">
-  <img className={classes.noPadding} id="fbtn" src={fbtn} alt={brand.name} />
+  <img className={classes.noPadding} src={fbtn} alt="Facebook" />
 </Button>
 
 </section>

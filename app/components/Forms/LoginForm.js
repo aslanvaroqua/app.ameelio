@@ -24,7 +24,8 @@ import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
 import styles from './user-jss';
 import { ContentDivider } from '../Divider';
-
+import fbtn from 'dan-images/oauth/fbtn.png';
+import gbtn from 'dan-images/oauth/gbtn.png';
 // validation functions
 const required = value => (value == null ? 'Required' : undefined);
 const email = value => (
@@ -86,24 +87,20 @@ class LoginForm extends React.Component {
           <section className={classes.socmedLogin}>
             <div className={classes.btnArea}>
               <Button
-                variant="outlined"
                 size="small"
-                className={classes.redBtn}
                 type="button"
                 onClick={onSubmitGoogle}
               >
-                <AllInclusive className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Google
+  <img className={classes.noPadding} src={gbtn} alt="Google" />
+
               </Button>
               <Button
-                variant="outlined"
                 size="small"
-                className={classes.blueBtn}
                 type="button"
                 onClick={onSubmitFacebook}
               >
-                <AllInclusive className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Facebook
+                  <img className={classes.noPadding} src={fbtn} alt="Facebook" />
+
               </Button>
             </div>
             <ContentDivider content="Or sign in with email" />

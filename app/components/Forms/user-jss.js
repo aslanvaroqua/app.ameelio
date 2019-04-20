@@ -273,6 +273,7 @@ const styles = theme => ({
     },
   },
   regLogo: {
+    height:'50vw',
   },
   buttonLink: {
     background: 'none',
