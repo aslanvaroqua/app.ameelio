@@ -131,6 +131,7 @@ const styles = theme => ({
       willChange: 'inherit !important' // hack for floating form issue when expaded
     },
     '&$sidebarLayout': {
+      height:'150vh',
       paddingTop: theme.spacing.unit * 8,
     },
     '&$topbarLayout': {
