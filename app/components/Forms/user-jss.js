@@ -239,6 +239,18 @@ const styles = theme => ({
   noMargin: {
     margin: 0
   },
+  topMargin: {
+    'marginTop':'10vw',
+    'marginBottom':'10vw',
+
+  },
+  noPadding: {
+    padding: '0px',
+    border: '0px',
+  },
+  '#fbtn': {
+    padding: 0,
+  },
   redBtn: {
     color: red[500],
     borderColor: red[500],
@@ -259,6 +271,8 @@ const styles = theme => ({
     '&:hover': {
       borderColor: cyan[700],
     },
+  },
+  regLogo: {
   },
   buttonLink: {
     background: 'none',

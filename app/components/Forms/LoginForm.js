@@ -63,7 +63,6 @@ class LoginForm extends React.Component {
         <Hidden mdUp>
           <NavLink to="/" className={classNames(classes.brand, classes.outer)}>
             <img src={logo} alt={brand.name} />
-            {brand.name}
           </NavLink>
         </Hidden>
         <Paper className={classNames(classes.paperWrap, deco && classes.petal)}>
@@ -71,7 +70,6 @@ class LoginForm extends React.Component {
             <div className={classes.topBar}>
               <NavLink to="/" className={classes.brand}>
                 <img src={logo} alt={brand.name} />
-                {brand.name}
               </NavLink>
               <Button size="small" className={classes.buttonLink} component={NavLink} to="/register">
                 <Icon className={classes.icon}>arrow_forward</Icon>
@@ -83,7 +81,7 @@ class LoginForm extends React.Component {
             Sign In
           </Typography>
           <Typography variant="caption" className={classes.subtitle} gutterBottom align="center">
-            Lorem ipsum dolor sit amet
+            
           </Typography>
           <section className={classes.socmedLogin}>
             <div className={classes.btnArea}>
@@ -104,7 +102,7 @@ class LoginForm extends React.Component {
                 type="button"
                 onClick={onSubmitFacebook}
               >
-                <Brightness5 className={classNames(classes.leftIcon, classes.iconSmall)} />
+                <AllInclusive className={classNames(classes.leftIcon, classes.iconSmall)} />
                 Facebook
               </Button>
             </div>

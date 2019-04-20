@@ -210,15 +210,15 @@ const lightPalette = {
   blueCyanTheme: {
     palette: {
       primary: {
-        light: '#E1F5FE',
-        main: '#039BE5',
-        dark: '#01579B',
+        light: '#BABECD',
+        main: '#b3d4fc',
+        dark: '#677093',
         contrastText: '#fff',
       },
       secondary: {
-        light: '#E0F7FA',
-        main: '#00BCD4',
-        dark: '#00838F',
+        light: '#BABECD',
+        main: '#b3d4fc',
+        dark: '#677093',
         contrastText: '#fff',
       },
     },
@@ -270,7 +270,24 @@ const lightPalette = {
         contrastText: '#fff',
       },
     },
-  }
-};
+  },
+    ameelioTheme: {
+      palette: {
+        primary: {
+          light: '#BABECD',
+          main: '#b3d4fc',
+          dark: '#677093',
+          contrastText: '#fff',
+        },
+        secondary: {
+          light: '#BABECD',
+          main: '#b3d4fc',
+          dark: '#677093',
+          contrastText: '#fff',
+        },
+      },
+ },
+}
+
 
 export default lightPalette;

@@ -21,7 +21,7 @@ const url = '/api/docs?src=';
 
 const styles = theme => ({
   button: {
-    margin: '8px 5px',
+    // margin: '8px 5px',
   },
   iconSmall: {
     fontSize: 20,

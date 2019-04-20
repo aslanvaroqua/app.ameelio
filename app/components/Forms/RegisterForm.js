@@ -22,6 +22,9 @@ import Hidden from '@material-ui/core/Hidden';
 import brand from 'dan-api/dummy/brand';
 import logo from 'dan-images/logo.svg';
 import styles from './user-jss';
+import fbtn from 'dan-images/oauth/fbtn.png';
+import gbtn from 'dan-images/oauth/gbtn.png'
+
 
 // validation functions
 const required = value => (value == null ? 'Required' : undefined);
@@ -63,50 +66,76 @@ class RegisterForm extends React.Component {
       handleSubmit,
       pristine,
       submitting,
-      deco
+      deco,
+      onSubmitGoogle,
+      onSubmitFacebook
     } = this.props;
     const { tab } = this.state;
     return (
       <Fragment>
         <Hidden mdUp>
           <NavLink to="/" className={classNames(classes.brand, classes.outer)}>
-            <img src={logo} alt={brand.name} />
-            {brand.name}
+            <img className={classes.regLogo} src={logo} alt={brand.name} />
+
           </NavLink>
         </Hidden>
-        <Paper className={classNames(classes.paperWrap, deco && classes.petal)}>
-          <Hidden smDown>
+        <Paper className={classNames(classes.paperWrap, classes.topMargin, deco && classes.petal)}>
+          {/* <Hidden smDown> */}
             <div className={classes.topBar}>
               <NavLink to="/" className={classes.brand}>
-                <img src={logo} alt={brand.name} />
-                {brand.name}
+                <img className={classes.regLogo} src={logo} alt={brand.name} />
               </NavLink>
               <Button size="small" className={classes.buttonLink} component={NavLink} to="/login">
                 <Icon className={classes.icon}>arrow_forward</Icon>
                 Already have account ?
               </Button>
             </div>
-          </Hidden>
+          {/* </Hidden> */}
           <Typography variant="h4" className={classes.title} gutterBottom>
             Register
           </Typography>
           <Typography variant="caption" className={classes.subtitle} gutterBottom align="center">
-            Lorem ipsum dolor sit amet
+
           </Typography>
-          <Tabs
-            value={tab}
-            onChange={this.handleChangeTab}
-            indicatorColor="secondary"
-            textColor="secondary"
-            centered
-            className={classes.tab}
-          >
-            <Tab label="With Email" />
-            <Tab label="With Social Media" />
-          </Tabs>
-          {tab === 0 && (
+
+          <section className={classes.socmedFull}>
+
+            
+<Button fullWidth variant="outlined" onClick={onSubmitGoogle} className={classes.noPadding} size="large" type="button">
+  <img className={classes.noPadding} src={gbtn} alt={brand.name} />
+
+</Button>
+<Button fullWidth variant="outlined" onClick={onSubmitFacebook} className={classes.noPadding} size="large"  type="button">
+  <img className={classes.noPadding} id="fbtn" src={fbtn} alt={brand.name} />
+</Button>
+
+</section>
             <section className={classes.formWrap}>
               <form onSubmit={handleSubmit}>
+               <div>
+                  <FormControl className={classes.formControl}>
+                    <Field
+                      name="fname"
+                      component={TextField}
+                      placeholder="First Name"
+                      label="First Name"
+                      required
+                      className={classes.field}
+                    />
+                  </FormControl>
+                </div>
+                <div>
+                  <FormControl className={classes.formControl}>
+                    <Field
+                      name="lname"
+                      component={TextField}
+                      placeholder="Last Name"
+                      label="Last Name"
+                      required
+                      className={classes.field}
+                    />
+                  </FormControl>
+                </div> 
                 <div>
                   <FormControl className={classes.formControl}>
                     <Field
@@ -170,23 +199,9 @@ class RegisterForm extends React.Component {
                 </div>
               </form>
             </section>
-          )}
-          {tab === 1 && (
-            <section className={classes.socmedFull}>
-              <Button fullWidth variant="outlined" size="large" className={classes.redBtn} type="button">
-                <AllInclusive className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Socmed 1
-              </Button>
-              <Button fullWidth variant="outlined" size="large" className={classes.blueBtn} type="button">
-                <Brightness5 className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Socmed 2
-              </Button>
-              <Button fullWidth variant="outlined" size="large" className={classes.cyanBtn} type="button">
-                <People className={classNames(classes.leftIcon, classes.iconSmall)} />
-                Socmed 3
-              </Button>
-            </section>
-          )}
+ 
+
+
         </Paper>
       </Fragment>
     );
@@ -199,7 +214,15 @@ RegisterForm.propTypes = {
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
   deco: PropTypes.bool.isRequired,
+  onSubmitFacebook: PropTypes.func,
+  onSubmitGoogle: PropTypes.func,
 };
+
+RegisterForm.defaultProps = {
+  onSubmitFacebook: () => {},
+  onSubmitGoogle: () => {},
+};
+
 
 const RegisterFormReduxed = reduxForm({
   form: 'immutableExample',

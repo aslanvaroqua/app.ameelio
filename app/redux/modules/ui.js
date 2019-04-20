@@ -15,7 +15,7 @@ import {
 
 const initialState = {
   /* Settings for Themes and layout */
-  theme: 'blueCyanTheme',
+  theme: 'ameelioTheme',
   type: 'light', // light or dark
   gradient: true, // true or false
   decoration: true, // true or false
@@ -25,7 +25,7 @@ const initialState = {
   sidebarOpen: true,
   pageLoaded: false,
   palette: List([
-    { name: 'Fruit', value: 'greenOrangeTheme' },
+    { name: 'Ameelio', value: 'ameelioTheme' },
     { name: 'Purple', value: 'purpleRedTheme' },
     { name: 'Ocean Sky', value: 'skyBlueTheme' },
     { name: 'Rose Gold', value: 'magentaTheme' },

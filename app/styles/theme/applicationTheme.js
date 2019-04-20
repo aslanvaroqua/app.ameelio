@@ -104,18 +104,19 @@ const applicationTheme = (color, mode) => ({
       }
     },
     MuiButton: {
+      padding:0,
       contained: {
         boxShadow: 'none'
       },
       root: {
-        borderRadius: '20px',
+        borderRadius: '10px',
         fontWeight: 600
       },
       fab: {
         boxShadow: '0 2px 20px -3px rgb(128, 128, 128)'
       },
       sizeSmall: {
-        padding: '7px 12px'
+        // padding: '1px 4px'
       }
     },
     MuiTypography: {
@@ -359,7 +360,7 @@ const applicationTheme = (color, mode) => ({
     },
     MuiToggleButtonGroup: {
       root: {
-        borderRadius: 20,
+        borderRadius: '4px',
         boxShadow: 'none',
         border: `1px solid ${themePalette(color, mode).palette.secondary.main}`
       },
