@@ -6,11 +6,11 @@ export const accordionContent = [
 ];
 
 export const senderMockData = {
-  name: 'Erica Doe',
-  address_line1: '46 Worcester Lane',
-  address_city: 'Brooklyn',
-  address_state: 'NY',
-  address_zip: '34568-9683',
+  name: 'Zo O.',
+  address_line1: '127 Wall St',
+  address_city: 'New Haven',
+  address_state: 'CT',
+  address_zip: '06511',
   address_country: 'US',
 };
 
