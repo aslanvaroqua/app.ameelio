@@ -90,7 +90,7 @@ const styles = theme => ({
       height: 64
     },
     '&$halfBg': {
-      height: 400
+      height: "100%"
     },
     '&$fullBg': {
       height: '100%'
