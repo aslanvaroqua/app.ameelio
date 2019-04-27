@@ -105,7 +105,7 @@ const styles = theme => ({
   },
   decorationWave: {
     width: '100%',
-    height: 'auto',
+    height: '100%',
     position: 'absolute',
     left: -2,
     bottom: -32,
@@ -117,7 +117,7 @@ const styles = theme => ({
   },
   decorationPetal: {
     width: '100%',
-    height: 'auto',
+    height: '100%',
     position: 'absolute',
     left: 0,
     top: 0,
