@@ -27,27 +27,27 @@ class Decoration extends React.Component {
       return classes.fullBg;
     };
     const renderDecor = (type, position) => {
-      const mergeDeco = type + '-' + position;
-      if (mergeDeco === 'dark-half') {
-        return (
-          <img src={decorationDark} alt="decoration" className={classes.decorationWave} />
-        );
-      }
-      if (mergeDeco === 'dark-full') {
-        return (
-          <img src={petalLight} alt="decoration" className={classes.decorationPetal} />
-        );
-      }
-      if (mergeDeco === 'light-half') {
-        return (
-          <img src={decorationLight} alt="decoration" className={classes.decorationWave} />
-        );
-      }
-      if (mergeDeco === 'light-full') {
-        return (
-          <img src={petalLight} alt="decoration" className={classes.decorationPetal} />
-        );
-      }
+//       const mergeDeco = type + '-' + position;
+//       if (mergeDeco === 'dark-half') {
+//         #return (
+//           #<img src={decorationDark} alt="decoration" className={classes.decorationWave} />
+//         );
+//       }
+//       if (mergeDeco === 'dark-full') {
+//         return (
+//           <img src={petalLight} alt="decoration" className={classes.decorationPetal} />
+//         );
+//       }
+//       if (mergeDeco === 'light-half') {
+//         return (
+//           <img src={decorationLight} alt="decoration" className={classes.decorationWave} />
+//         );
+//       }
+//       if (mergeDeco === 'light-full') {
+//         return (
+//           <img src={petalLight} alt="decoration" className={classes.decorationPetal} />
+//         );
+//       }
       return false;
     };
     return (
